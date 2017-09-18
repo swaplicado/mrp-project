@@ -16,4 +16,4 @@ Software Aplicado S.A. de C.V.
 
 ### License
 
-Software Aplicado S.A. de C.V.
+Software Aplicado S.A. de C.V
