@@ -29,6 +29,7 @@ class SMMenu
               $menu->get(trans('mrp.MRP'))->add(trans('mrp.MRP_COMPANIES'), array('route' => 'mrp.companies.index'));
               $menu->get(trans('mrp.MRP'))->add(trans('mrp.BRANCHES'), array('route' => 'mrp.branches.index'));
               $menu->get(trans('mrp.MRP'))->add(trans('mrp.ACG_YEAR_PER'), array('route' => 'mrp.years.index'));
+              $menu->get(trans('mrp.MRP'))->add(trans('mrp.BPS'), array('route' => 'mrp.bps.index'));
           });
 
           break;

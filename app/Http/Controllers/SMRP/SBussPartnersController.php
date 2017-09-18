@@ -39,8 +39,8 @@ class SBussPartnersController extends Controller {
       $this->iFilter = $request->filter == null ? \Config::get('scsys.FILTER.ACTIVES') : $request->filter;
       $lBPartners = SBussPartner::Search($request->name, $this->iFilter)->orderBy('bp_name', 'ASC')->paginate(20);
 
-      return view('mrp.bpartners.index')
-          ->with('bpartners', $lBPartners)
+      return view('mrp.bps.index')
+          ->with('bps', $lBPartners)
           ->with('actualUserPermission', $this->oCurrentUserPermission)
           ->with('sClassNav', (session()->has('menu') ? session('menu')->getClassNav() : ''))
           ->with('iFilter', $this->iFilter);
@@ -55,7 +55,7 @@ class SBussPartnersController extends Controller {
     {
       if (SValidation::canCreate($this->oCurrentUserPermission->privilege_id))
         {
-          return view('mrp.bpartners.createEdit');
+          return view('mrp.bps.createEdit');
         }
         else
         {
@@ -81,7 +81,7 @@ class SBussPartnersController extends Controller {
 
         Flash::success(trans('messages.REG_CREATED'));
 
-        return redirect()->route('mrp.bpartners.index');
+        return redirect()->route('mrp.bps.index');
     }
 
     /**
@@ -105,7 +105,7 @@ class SBussPartnersController extends Controller {
     {
         $bpartner = SBussPartner::find($id);
 
-        return view('mrp.bpartners.createEdit')->with('bpartner', $bpartner)
+        return view('mrp.bps.createEdit')->with('bpartner', $bpartner)
                                       ->with('iFilter', $this->iFilter);
     }
 
@@ -125,7 +125,7 @@ class SBussPartnersController extends Controller {
 
          Flash::warning(trans('messages.REG_EDITED'));
 
-         return redirect()->route('mrp.bpartners.index');
+         return redirect()->route('mrp.bps.index');
      }
 
      /**
@@ -159,7 +159,7 @@ class SBussPartnersController extends Controller {
 
          Flash::success(trans('messages.REG_ACTIVATED'));
 
-         return redirect()->route('mrp.bpartners.index');
+         return redirect()->route('mrp.bps.index');
      }
 
     /**
@@ -179,6 +179,6 @@ class SBussPartnersController extends Controller {
 
          Flash::error(trans('messages.REG_DELETED'));
 
-         return redirect()->route('mrp.bpartners.index');
+         return redirect()->route('mrp.bps.index');
      }
 }

@@ -11,5 +11,5 @@ return [
       'ACG_YEAR_PER'  => 'Ejercicios y períodos',
       'ACCG_YEAR'  => 'Ejercicios',
       'PERIODS'  => 'Periodos',
-
+      'BPS'  => 'Asociados de negocios',
 ];

@@ -1,17 +1,17 @@
 @extends('front.mainCapturaEdicion')
 @if(isset($bpartner))
 	<?php
-			$sRoute = 'mrp.bpartners.update';
+			$sRoute = 'mrp.bps.update';
 			$aux = $bpartner;
 	?>
 	@section('title', trans('userinterface.titles.EDIT_BRANCH'))
 @else
 	<?php
-		$sRoute='mrp.bpartners.store';
+		$sRoute='mrp.bps.store';
 	?>
 	@section('title', trans('userinterface.titles.CREATE_BRANCH'))
 @endif
-	<?php $sRoute2 = 'mrp.bpartners.index' ?>
+	<?php $sRoute2 = 'mrp.bps.index' ?>
 
 @section('content')
 

@@ -206,18 +206,18 @@ Route::group(['middleware' => ['auth']], function() {
         'as' => 'mrp.months.update'
       ]);
 
-      Route::resource('bpartners','SMRP\SBussPartnersController');
-      Route::get('bpartners/{id}/destroy',[
+      Route::resource('bps','SMRP\SBussPartnersController');
+      Route::get('bps/{id}/destroy',[
         'uses' => 'SMRP\SBussPartnersController@Destroy',
-        'as' => 'mrp.bpartners.destroy'
+        'as' => 'mrp.bps.destroy'
       ]);
-      Route::get('bpartners/{id}/activate', [
+      Route::get('bps/{id}/activate', [
         'uses' => 'SMRP\SBussPartnersController@Activate',
-        'as' => 'mrp.bpartners.activate'
+        'as' => 'mrp.bps.activate'
       ]);
-      Route::get('bpartners/{id}/copy', [
+      Route::get('bps/{id}/copy', [
   			'uses' => 'SMRP\SBussPartnersController@Copy',
-  			'as' => 'mrp.bpartners.copy'
+  			'as' => 'mrp.bps.copy'
   		]);
 
     });

@@ -1,1 +1,1 @@
-{{ $oRegistry->created_at }}
+{{ $oRegistry->created_at->toDateTimeString()  }}
