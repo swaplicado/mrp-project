@@ -16,7 +16,7 @@
 		<div class="panel-body">
 			<section>
 				<h1 style="text-align = center;">MRP</h1>
-				<h1>Manufacturing Resources Planning</h1>
+				<h1>Manufacturing Resources Plannin</h1>
 
 				<a class="btn btn-primary" href="{{ route('auth.login') }}">Entrar</a>
 			</section>
