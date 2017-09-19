@@ -39,27 +39,100 @@ class SBussPartner extends Model {
     return $this->belongsTo('App\User', 'updated_by_id');
   }
 
-  public function scopeSearch($query, $bpName, $iFilter)
+  public function scopeSearch($query, $bpName, $iFilter, $iFilterBp)
   {
+      $bAtt = true;
+      $sAtt = '';
+
+      switch ($iFilterBp) {
+        case \Config::get('scmrp.ATT.ALL'):
+          $bAtt = false;
+          break;
+        case \Config::get('scmrp.ATT.IS_COMP'):
+          $sAtt = 'is_company';
+          break;
+        case \Config::get('scmrp.ATT.IS_SUPP'):
+          $sAtt = 'is_supplier';
+          break;
+        case \Config::get('scmrp.ATT.IS_CUST'):
+          $sAtt = 'is_customer';
+          break;
+        case \Config::get('scmrp.ATT.IS_CRED'):
+          $sAtt = 'is_creditor';
+          break;
+        case \Config::get('scmrp.ATT.IS_DEBT'):
+          $sAtt = 'is_debtor';
+          break;
+        case \Config::get('scmrp.ATT.IS_BANK'):
+          $sAtt = 'is_bank';
+          break;
+        case \Config::get('scmrp.ATT.IS_EMPL'):
+          $sAtt = 'is_employee';
+          break;
+        case \Config::get('scmrp.ATT.IS_AGTS'):
+          $sAtt = 'is_agt_sales';
+          break;
+        case \Config::get('scmrp.ATT.IS_PART'):
+          $sAtt = 'is_partner';
+          break;
+        default:
+          $bAtt = false;
+          break;
+      }
+
       switch ($iFilter) {
         case \Config::get('scsys.FILTER.ACTIVES'):
-          return $query->where('is_deleted', '=', "".\Config::get('scsys.STATUS.ACTIVE'))
-                      ->where('bp_name', 'LIKE', "%".$bpName."%");
+          if ($bAtt)
+          {
+            return $query->where('is_deleted', '=', "".\Config::get('scsys.STATUS.ACTIVE'))
+                        ->where($sAtt, '=',  1)
+                        ->where('bp_name', 'LIKE', "%".$bpName."%");
+          }
+          else
+          {
+            return $query->where('is_deleted', '=', "".\Config::get('scsys.STATUS.ACTIVE'))
+                        ->where('bp_name', 'LIKE', "%".$bpName."%");
+          }
           break;
 
         case \Config::get('scsys.FILTER.DELETED'):
-          return $query->where('is_deleted', '=', "".\Config::get('scsys.STATUS.DEL'))
-                        ->where('bp_name', 'LIKE', "%".$bpName."%");
+          if ($bAtt)
+          {
+            return $query->where('is_deleted', '=', "".\Config::get('scsys.STATUS.DEL'))
+                          ->where($sAtt, '=', 1)
+                          ->where('bp_name', 'LIKE', "%".$bpName."%");
+          }
+          else
+          {
+            return $query->where('is_deleted', '=', "".\Config::get('scsys.STATUS.DEL'))
+                          ->where('bp_name', 'LIKE', "%".$bpName."%");
+          }
           break;
 
         case \Config::get('scsys.FILTER.ALL'):
-          return $query->where('bp_name', 'LIKE', "%".$bpName."%");
+          if ($bAtt)
+          {
+            return $query->where('bp_name', 'LIKE', "%".$bpName."%")
+                          ->where($sAtt, '=', 1);
+          }
+          else
+          {
+            return $query->where('bp_name', 'LIKE', "%".$bpName."%");
+          }
           break;
 
         default:
-          return $query->where('bp_name', 'LIKE', "%".$bpName."%");
+          if ($bAtt)
+          {
+            return $query->where('bp_name', 'LIKE', "%".$bpName."%")
+                          ->where($sAtt, '=', 1);
+          }
+          else
+          {
+            return $query->where('bp_name', 'LIKE', "%".$bpName."%");
+          }
           break;
       }
   }
-  
+
 }

@@ -14,6 +14,7 @@ class SBussPartnersController extends Controller {
 
     private $oCurrentUserPermission;
     private $iFilter;
+    private $iFilterBp;
     private $sClassNav;
 
     public function __construct()
@@ -27,6 +28,7 @@ class SBussPartnersController extends Controller {
          $this->oCurrentUserPermission = SUtil::getTheUserPermission(!\Auth::check() ? \Config::get('scsys.UNDEFINED') : \Auth::user()->id, \Config::get('scperm.VIEW_CODE.BPS'));
 
          $this->iFilter = \Config::get('scsys.FILTER.ACTIVES');
+         $this->iFilterBp = \Config::get('scmrp.ATT.ALL');
     }
 
     /**
@@ -37,13 +39,16 @@ class SBussPartnersController extends Controller {
     public function index(Request $request)
     {
       $this->iFilter = $request->filter == null ? \Config::get('scsys.FILTER.ACTIVES') : $request->filter;
-      $lBPartners = SBussPartner::Search($request->name, $this->iFilter)->orderBy('bp_name', 'ASC')->paginate(20);
+      $this->iFilterBp = $request->filterBp == null ? \Config::get('scmrp.ATT.ALL') : $request->filterBp;
+
+      $lBPartners = SBussPartner::Search($request->name, $this->iFilter, $this->iFilterBp)->orderBy('bp_name', 'ASC')->paginate(20);
 
       return view('mrp.bps.index')
           ->with('bps', $lBPartners)
           ->with('actualUserPermission', $this->oCurrentUserPermission)
           ->with('sClassNav', (session()->has('menu') ? session('menu')->getClassNav() : ''))
-          ->with('iFilter', $this->iFilter);
+          ->with('iFilter', $this->iFilter)
+          ->with('iFilterBp', $this->iFilterBp);
     }
 
     /**
@@ -142,7 +147,6 @@ class SBussPartnersController extends Controller {
          $bpartnerCopy->id_bp = 0;
 
          return view('users.createEdit')->with('bpartner', $bpartnerCopy)
-                                       ->with('iFilter', $this->iFilter)
                                        ->with('bIsCopy', true);
      }
 

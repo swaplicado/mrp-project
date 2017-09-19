@@ -6,6 +6,7 @@ return [
       'MODULE'  => 'Módulo Central',
 
       'MRP'  => 'MRP',
+      'MRP_'  => 'Manufacturing Resources Planning',
       'MRP_COMPANIES'  => 'Datos de la empresa',
       'BRANCHES'  => 'Sucursales',
       'ACG_YEAR_PER'  => 'Ejercicios y períodos',

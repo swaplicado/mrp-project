@@ -12,7 +12,7 @@ return [
       'PROD_ORDER'  => 'Orden de producción',
       'PROD_ORDER_T'  => 'Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.',
 
-      'EXPL_MAT'  => 'Explosión de materriales',
+      'EXPL_MAT'  => 'Explosión de materiales',
       'EXPL_MAT_T'  => 'Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.',
 
       'ASSIGNAMENT'  => 'Asignación de insumos y productos',

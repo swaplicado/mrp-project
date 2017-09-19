@@ -10,6 +10,7 @@
 													],
 													$iFilter, ['class' => 'form-control', 'required']) !!}
 	    </span>
+			@yield('addfilters')
 	    <span class="input-group-btn">
 	        <button id="searchbtn" type="submit" class="form-control">
 						<span class="glyphicon glyphicon-search"></span>

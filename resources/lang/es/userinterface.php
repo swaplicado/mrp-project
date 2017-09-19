@@ -64,8 +64,12 @@
 
 		'placeholders' 	=> 	[
 											'SEARCH' => 'Buscar...',
+											'BP' => 'Asociado de negocios...',
+											'LAST_NAME' => 'Apellidos...',
 							 				'NAME' => 'Nombre...',
 							 				'COMPANY' => 'Empresa...',
+							 				'CURP' => 'CURP...',
+							 				'RFC' => 'RFC...',
 							 				'EMAIL' => 'example@gmail.com',
 							 				'DB_NAME' => 'Nombre de base de datos...',
 							 				'DB_HOST' => 'Host...',
@@ -82,6 +86,7 @@
 											'BRANCH' => 'Sucursal...',
 											'YEAR' => 'Año...',
 											'MONTH' => 'Mes...',
+											'WEB' => 'Web...',
 											],
 
 		'tooltips'     	=>   [
@@ -96,7 +101,7 @@
 											'ACTIVES' => 'Activos',
 											'ALL' => 'Todos',
 											'ASSIGNAMENT' => 'Tipo',
-											'BP' => 'Asociados Negocios',
+											'BP' => 'Asociado Negocios',
 											'BRANCH' => 'Sucursal',
 											'CLOSED' => 'Cerrado',
 											'CODE' => 'Código',
@@ -114,7 +119,7 @@
 											'EMAIL' =>   'Correo',
 											'INACTIVE' => 'Inactivo',
 											'INACTIVES' => 'Inactivos',
-											'LAST_NAME' => 'Apellido',
+											'LAST_NAME' => 'Apellidos',
 											'NAME' => 'Nombre',
 											'OPENED' => 'Abierto',
 											'PASSWORD' => 'Contraseña',
@@ -130,7 +135,17 @@
 											'PERIOD' => 'Periodo',
 											'UPDATED' => 'Modificado',
 											'UPDATED_BY' => 'Mod. por',
+											'IS_COMP' => 'Empresa',
+											'IS_SUPP' => 'Proveedor',
+											'IS_CUST' => 'Cliente',
+											'IS_CRED' => 'Acreedor',
+											'IS_DEBT' => 'Deudor',
+											'IS_BANK' => 'Banco',
+											'IS_EMPL' => 'Empleado',
+											'IS_AGTS' => 'Agt vtas.',
+											'IS_PART' => 'Socio',
 											'WEB' => 'Web',
+											
 										]
 
 	];

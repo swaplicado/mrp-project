@@ -20,11 +20,14 @@
 						<ul class="dropdown-menu" aria-labelledby="dropdownMenu1">
 							@if (\Auth::user()->user_type_id == \Config::get('scsys.TP_USER.ADMIN'))
 								<li>
-				            <a href="{{ route('plantilla.admin') }}">Administrar</a>
+				            <a href="{{ route('plantilla.admin') }}">{{ trans('userinterface.ADMINISTRATOR') }}</a>
 				        </li>
 							@endif
+								<li>
+										<a href="{{ route('mrp.home') }}">{{ trans('mrp.MODULE') }}</a>
+								</li>
 				        <li>
-				            <a href="{{ route('auth.logout') }}">Salir</a>
+				            <a href="{{ route('auth.logout') }}">{{ trans('userinterface.EXIT') }}</a>
 				        </li>
 			      </ul>
 					</div>
