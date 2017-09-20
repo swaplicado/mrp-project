@@ -1,5 +1,5 @@
 <?php
-//\Config::get('scsys.OPERATION.EDIT')
+//\Config::get('scwms.MVT_CLS_IN')
 
 return [
 

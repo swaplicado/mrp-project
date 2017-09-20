@@ -15,6 +15,13 @@ class User extends Model implements AuthenticatableContract,
     use Authenticatable, Authorizable, CanResetPassword;
 
     /**
+     * The connection used by the model.
+     *
+     * @var string
+     */
+    protected $connection = 'ssystem';
+
+    /**
      * The database table used by the model.
      *
      * @var string

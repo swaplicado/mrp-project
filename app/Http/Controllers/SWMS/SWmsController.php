@@ -8,7 +8,7 @@ use App\Http\Controllers\Controller;
 use App\SUtils\SUtil;
 use App\SUtils\SMenu;
 
-class SWarehousesController extends Controller
+class SWmsController extends Controller
 {
     private $oCurrentUserPermission;
     private $iFilter;

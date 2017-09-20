@@ -11,7 +11,7 @@
 
 
 		<div class="form-group">
-			{!! Form::label('name', trans('userinterface.labels.COMPANY')) !!}
+			{!! Form::label('name', trans('userinterface.labels.COMPANY').'*') !!}
 			{!! Form::text('name',
 				isset($company) ? $company->name : null , ['class'=>'form-control', 'placeholder' => trans('userinterface.placeholders.COMPANY'), 'required']) !!}
 		</div>

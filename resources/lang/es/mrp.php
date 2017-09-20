@@ -7,6 +7,7 @@ return [
 
       'MRP'  => 'MRP',
       'MRP_'  => 'Manufacturing Resources Planning',
+      'CATALOGUES'  => 'Catálogos',
       'MRP_COMPANIES'  => 'Datos de la empresa',
       'BRANCHES'  => 'Sucursales',
       'ACG_YEAR_PER'  => 'Ejercicios y períodos',

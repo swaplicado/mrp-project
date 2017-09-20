@@ -11,6 +11,7 @@ return [
           'PALLETS' => 'Tarimas',
           'LOTS' => 'Lotes',
           'BAR_CODES' => 'Códigos de barras',
+          'UNITS' => 'Unidades',
 
       'CONFIG' => 'Configuración',
           'CONFIG' => 'Configuración',

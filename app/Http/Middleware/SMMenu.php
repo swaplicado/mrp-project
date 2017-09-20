@@ -30,6 +30,8 @@ class SMMenu
               $menu->get(trans('mrp.MRP'))->add(trans('mrp.BRANCHES'), array('route' => 'mrp.branches.index'));
               $menu->get(trans('mrp.MRP'))->add(trans('mrp.ACG_YEAR_PER'), array('route' => 'mrp.years.index'));
               $menu->get(trans('mrp.MRP'))->add(trans('mrp.BPS'), array('route' => 'mrp.bps.index'));
+              $menu->add(trans('mrp.CATALOGUES'), '')->nickname(trans('mrp.CATALOGUES'));
+              $menu->get(trans('mrp.CATALOGUES'))->add(trans('wms.UNITS'), array('route' => 'wms.units.index'));
           });
 
           break;
@@ -75,6 +77,7 @@ class SMMenu
               $menu->get(trans('wms.ITEMS'))->add(trans('wms.GENDERS'), 'what-we-do');
               $menu->get(trans('wms.ITEMS'))->add(trans('wms.GROUPS'), 'what-we-do');
               $menu->get(trans('wms.ITEMS'))->add(trans('wms.FAMILIES'), 'what-we-do');
+              $menu->get(trans('wms.ITEMS'))->add(trans('wms.UNITS'), array('route' => 'wms.units.index'));
               $menu->get(trans('wms.ITEMS'))->add(trans('wms.CONVERTIONS'), 'what-we-do');
               $menu->add(trans('wms.INVENTORY'), 'what-we-do');
               $menu->add(trans('wms.REPORTS'), 'what-we-do');

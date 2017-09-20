@@ -16,7 +16,7 @@
 @section('content')
 
 		<div class="form-group">
-			{!! Form::label('bp_name', trans('userinterface.labels.BP')) !!}
+			{!! Form::label('bp_name', trans('userinterface.labels.BP').'*') !!}
 			{!! Form::text('bp_name',
 				isset($bpartner) ? $bpartner->bp_name : null , ['class'=>'form-control', 'placeholder' => trans('userinterface.placeholders.BP'), 'required']) !!}
 		</div>
@@ -24,17 +24,17 @@
 		<div class="form-group">
 			{!! Form::label('last_name', trans('userinterface.labels.LAST_NAME')) !!}
 			{!! Form::text('last_name',
-				isset($bpartner) ? $bpartner->last_name : null , ['class'=>'form-control', 'placeholder' => trans('userinterface.placeholders.LAST_NAME'), 'required']) !!}
+				isset($bpartner) ? $bpartner->last_name : null , ['class'=>'form-control', 'placeholder' => trans('userinterface.placeholders.LAST_NAME')]) !!}
 		</div>
 
 		<div class="form-group">
 			{!! Form::label('first_name', trans('userinterface.labels.NAME')) !!}
 			{!! Form::text('first_name',
-				isset($bpartner) ? $bpartner->first_name : null , ['class'=>'form-control', 'placeholder' => trans('userinterface.placeholders.NAME'), 'required']) !!}
+				isset($bpartner) ? $bpartner->first_name : null , ['class'=>'form-control', 'placeholder' => trans('userinterface.placeholders.NAME')]) !!}
 		</div>
 
 		<div class="form-group">
-			{!! Form::label('id_fiscal', trans('userinterface.labels.RFC')) !!}
+			{!! Form::label('id_fiscal', trans('userinterface.labels.RFC').'*') !!}
 			{!! Form::text('id_fiscal',
 				isset($bpartner) ? $bpartner->id_fiscal : null , ['class'=>'form-control', 'placeholder' => trans('userinterface.placeholders.RFC'), 'required']) !!}
 		</div>

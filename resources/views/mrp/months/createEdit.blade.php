@@ -14,9 +14,9 @@
 	<?php $sRoute2 = 'mrp.months.index' ?>
 
 @section('content')
-	
+
 		<div class="form-group">
-			{!! Form::label('id_month', trans('userinterface.labels.MONTH')) !!}
+			{!! Form::label('id_month', trans('userinterface.labels.MONTH').'*') !!}
 			{!! Form::number('id_month',
 				isset($month) ? $month->id_month : null , ['class'=>'form-control', 'placeholder' => trans('userinterface.placeholders.MONTH'), 'required']) !!}
 		</div>

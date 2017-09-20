@@ -84,7 +84,6 @@
 					<td>
 						<?php
 								$oRegistry = $bpartner;
-								$sRoute = 'mrp.bps';
 								$iRegistryId = $bpartner->id_bp;
 						?>
 						@include('front.listed.options')

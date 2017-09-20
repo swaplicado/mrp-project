@@ -19,6 +19,7 @@ class SMonthsController extends Controller
     public function __construct()
     {
        $this->middleware('mdpermission:'.\Config::get('scperm.TP_PERMISSION.VIEW').','.\Config::get('scperm.VIEW_CODE.MONTHS'));
+       
        $oMenu = new SMenu(\Config::get('scperm.MODULES.MRP'), 'navbar-mrp');
        session(['menu' => $oMenu]);
        $this->middleware('mdmenu:'.(session()->has('menu') ? session('menu')->getMenu() : \Config::get('scsys.UNDEFINED')));

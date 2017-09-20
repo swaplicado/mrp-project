@@ -33,6 +33,7 @@
 											'LIST_YEARS' => 'Años',
 											'LIST_MONTHS' => 'Periodos',
 											'LIST_BPS' => 'Asociados de negocios',
+											'LIST_UNITS' => 'Unidades',
 											'CREATE_USER' => 'Crear usuario',
 											'CREATE_PERMISSION' => 'Crear usuario',
 											'CREATE_ASSIGNAMENT' => 'Crear asignación',
@@ -40,6 +41,7 @@
 											'CREATE_BRANCH' => 'Crear sucursal',
 											'CREATE_YEAR' => 'Crear año',
 											'CREATE_BP' => 'Crear asociado',
+											'CREATE_UNIT' => 'Crear unidad',
 											'EDIT_USER' => 'Editar usuario',
 											'EDIT_PERMISSION' => 'Editar permiso',
 											'EDIT_ASSIGNAMENT' => 'Editar asignación',
@@ -48,6 +50,7 @@
 											'EDIT_BRANCH' => 'Editar sucursal',
 											'EDIT_YEAR' => 'Editar año',
 											'EDIT_BP' => 'Editar asociado',
+											'EDIT_UNIT' => 'Editar Unidad',
 											'SELECT_COMPANY' => 'Seleccione empresa:',
 											'SELECT_MODULE' => 'Seleccione Módulo',
 											],
@@ -87,6 +90,10 @@
 											'YEAR' => 'Año...',
 											'MONTH' => 'Mes...',
 											'WEB' => 'Web...',
+											'UNIT' => 'Unidad...',
+											'UNIT_EQ' => 'Unidad equivalente...',
+											'SYMBOL' => 'Símbolo...',
+											'EQUIVALENCE' => 'Equivalencia...',
 											],
 
 		'tooltips'     	=>   [
@@ -117,6 +124,7 @@
 											'DB_USER' => 'Usuario',
 											'DEL' => 'Eliminado',
 											'EMAIL' =>   'Correo',
+											'EQUIVALENCE' =>   'Equivalencia',
 											'INACTIVE' => 'Inactivo',
 											'INACTIVES' => 'Inactivos',
 											'LAST_NAME' => 'Apellidos',
@@ -133,6 +141,9 @@
 											'YEAR' => 'Año',
 											'MONTH' => 'Mes',
 											'PERIOD' => 'Periodo',
+											'SYMBOL' => 'Símbolo',
+											'UNIT' => 'Unidad',
+											'UNIT_EQ' => 'Unidad equivalente',
 											'UPDATED' => 'Modificado',
 											'UPDATED_BY' => 'Mod. por',
 											'IS_COMP' => 'Empresa',
@@ -145,7 +156,7 @@
 											'IS_AGTS' => 'Agt vtas.',
 											'IS_PART' => 'Socio',
 											'WEB' => 'Web',
-											
+
 										]
 
 	];

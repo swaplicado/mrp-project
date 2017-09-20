@@ -136,11 +136,28 @@ Route::group(['middleware' => ['auth']], function() {
 		Route::resource('qms','SQMS\SQualityController');
 
 //****************************************/ Warehouses /*************************
-		Route::get('/wms/home',[
-			'as' => 'wms.home',
-			'uses' => 'SWMS\SWarehousesController@Home'
-		]);
-		Route::resource('wms','SWMS\SWarehousesController');
+
+  Route::group(['prefix' => 'wms'], function () {
+  		Route::get('/home',[
+  			'as' => 'wms.home',
+  			'uses' => 'SWMS\SWmsController@Home'
+  		]);
+  		Route::resource('wms','SWMS\SWmsController');
+
+      Route::resource('units','SWMS\SUnitsController');
+      Route::get('units/{id}/destroy',[
+        'uses' => 'SWMS\SUnitsController@Destroy',
+        'as' => 'wms.units.destroy'
+      ]);
+      Route::get('units/{id}/activate', [
+        'uses' => 'SWMS\SUnitsController@Activate',
+        'as' => 'wms.units.activate'
+      ]);
+      Route::get('units/{id}/copy', [
+        'uses' => 'SWMS\SUnitsController@Copy',
+        'as' => 'wms.units.copy'
+      ]);
+  });
 
 
 //****************************************/ Shipments /*************************
