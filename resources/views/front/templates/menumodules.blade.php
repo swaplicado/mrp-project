@@ -1,3 +1,10 @@
+<?php
+  if (! isset($sClassNav))
+  {
+    $sClassNav = session()->has('menu') ? session('menu')->getClassNav() : '';
+  }
+?>
+
 <nav class="navbar {{ $sClassNav }}">
   <div class="container-fluid">
     <!-- Brand and toggle get grouped for better mobile display -->

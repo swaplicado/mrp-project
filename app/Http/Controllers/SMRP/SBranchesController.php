@@ -47,7 +47,6 @@ class SBranchesController extends Controller {
       return view('mrp.branches.index')
           ->with('branches', $lBranches)
           ->with('actualUserPermission', $this->oCurrentUserPermission)
-          ->with('sClassNav', (session()->has('menu') ? session('menu')->getClassNav() : ''))
           ->with('iFilter', $this->iFilter);
     }
 
@@ -62,7 +61,8 @@ class SBranchesController extends Controller {
         {
           $companies = SMrpCompany::orderBy('name', 'ASC')->lists('name', 'id_company');
 
-          return view('mrp.branches.createEdit')->with('companies', $companies);
+          return view('mrp.branches.createEdit')
+                        ->with('companies', $companies);
         }
         else
         {

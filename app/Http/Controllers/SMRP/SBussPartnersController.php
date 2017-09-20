@@ -46,7 +46,6 @@ class SBussPartnersController extends Controller {
       return view('mrp.bps.index')
           ->with('bps', $lBPartners)
           ->with('actualUserPermission', $this->oCurrentUserPermission)
-          ->with('sClassNav', (session()->has('menu') ? session('menu')->getClassNav() : ''))
           ->with('iFilter', $this->iFilter)
           ->with('iFilterBp', $this->iFilterBp);
     }

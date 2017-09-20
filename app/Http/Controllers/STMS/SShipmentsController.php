@@ -34,7 +34,7 @@ class SShipmentsController extends Controller
       */
      public function home()
      {
-       return view('tms.index')->with('sClassNav', (session()->has('menu') ? session('menu')->getClassNav() : ''));
+       return view('tms.index');
      }
 
     /**

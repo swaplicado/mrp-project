@@ -1,4 +1,9 @@
 @extends('front.mainCapturaEdicion')
+
+@section('menu')
+	@include('front.templates.menu')
+@endsection
+
 @if(isset($assignament))
 	<?php
 		$sRoute='userPermissions.update';

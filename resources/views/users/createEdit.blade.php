@@ -1,4 +1,9 @@
 @extends('front.mainCapturaEdicion')
+
+@section('menu')
+	@include('front.templates.menu')
+@endsection
+
 @if(isset($user))
 	<?php
 			$aux = $user;

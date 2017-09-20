@@ -25,6 +25,7 @@ class AddModulesTable extends Migration
       	['id_module' => '2','name' => 'Calidad','is active' => '0', 'is_deleted' => '0'],
       	['id_module' => '3','name' => 'Almacenes','is active' => '0', 'is_deleted' => '0'],
       	['id_module' => '4','name' => 'Embarques','is active' => '0', 'is_deleted' => '0'],
+        ['id_module' => '5','name' => 'Central','is active' => '0', 'is_deleted' => '0'],
       ]);
 
     }

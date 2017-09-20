@@ -29,7 +29,7 @@ class SQualityController extends Controller
      */
     public function home()
     {
-        return view('qms.index')->with('sClassNav', (session()->has('menu') ? session('menu')->getClassNav() : ''));
+        return view('qms.index');
     }
 
     /**

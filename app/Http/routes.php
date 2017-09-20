@@ -157,6 +157,19 @@ Route::group(['middleware' => ['auth']], function() {
         'uses' => 'SWMS\SUnitsController@Copy',
         'as' => 'wms.units.copy'
       ]);
+      Route::resource('whs','SWMS\SWarehousesController');
+      Route::get('whs/{id}/destroy',[
+        'uses' => 'SWMS\SWarehousesController@Destroy',
+        'as' => 'wms.whs.destroy'
+      ]);
+      Route::get('whs/{id}/activate', [
+        'uses' => 'SWMS\SWarehousesController@Activate',
+        'as' => 'wms.whs.activate'
+      ]);
+      Route::get('whs/{id}/copy', [
+        'uses' => 'SWMS\SWarehousesController@Copy',
+        'as' => 'wms.whs.copy'
+      ]);
   });
 
 

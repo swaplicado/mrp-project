@@ -9,22 +9,24 @@ use Laracasts\Flash\Flash;
 use App\SUtils\SUtil;
 use App\SUtils\SMenu;
 use App\SUtils\SValidation;
-use App\SWMS\SUnit;
+use App\SWMS\SWarehouse;
+use App\SWMS\SWhsType;
+use App\SMRP\SBranch;
 
-class SUnitsController extends Controller
+class SWarehousesController extends Controller
 {
     private $oCurrentUserPermission;
     private $iFilter;
 
     public function __construct()
     {
-       $this->middleware('mdpermission:'.\Config::get('scperm.TP_PERMISSION.VIEW').','.\Config::get('scperm.VIEW_CODE.UNITS'));
+       $this->middleware('mdpermission:'.\Config::get('scperm.TP_PERMISSION.VIEW').','.\Config::get('scperm.VIEW_CODE.WAREHOUSES'));
 
        $oMenu = new SMenu(\Config::get('scperm.MODULES.WMS'), 'navbar-green');
        session(['menu' => $oMenu]);
        $this->middleware('mdmenu:'.(session()->has('menu') ? session('menu')->getMenu() : \Config::get('scsys.UNDEFINED')));
 
-       $this->oCurrentUserPermission = SUtil::getTheUserPermission(!\Auth::check() ? \Config::get('scsys.UNDEFINED') : \Auth::user()->id, \Config::get('scperm.VIEW_CODE.UNITS'));
+       $this->oCurrentUserPermission = SUtil::getTheUserPermission(!\Auth::check() ? \Config::get('scsys.UNDEFINED') : \Auth::user()->id, \Config::get('scperm.VIEW_CODE.WAREHOUSES'));
 
        $this->iFilter = \Config::get('scsys.FILTER.ACTIVES');
     }
@@ -39,13 +41,13 @@ class SUnitsController extends Controller
     {
       $this->iFilter = $request->filter == null ? \Config::get('scsys.FILTER.ACTIVES') : $request->filter;
 
-      $lUnits = SUnit::Search($request->name, $this->iFilter)->orderBy('name', 'ASC')->paginate(20);
-      $lUnits->each(function($lUnits) {
-        $lUnits->equivalence;
+      $lWarehouses = SWarehouse::Search($request->name, $this->iFilter)->orderBy('name', 'ASC')->paginate(20);
+      $lWarehouses->each(function($lWarehouses) {
+        $lWarehouses->branch;
       });
 
-      return view('wms.units.index')
-          ->with('units', $lUnits)
+      return view('wms.whs.index')
+          ->with('warehouses', $lWarehouses)
           ->with('actualUserPermission', $this->oCurrentUserPermission)
           ->with('iFilter', $this->iFilter);
     }
@@ -59,10 +61,12 @@ class SUnitsController extends Controller
     {
       if (SValidation::canCreate($this->oCurrentUserPermission->privilege_id))
         {
-          $unitsEq = SUnit::orderBy('name', 'ASC')->lists('name', 'id_unit');
+          $lTypes = SWhsType::orderBy('name', 'ASC')->lists('name', 'id_type');
+          $lBranches = SBranch::orderBy('name', 'ASC')->lists('name', 'id_branch');
 
-          return view('wms.units.createEdit')
-                            ->with('unitseq', $unitsEq);
+          return view('wms.whs.createEdit')
+                        ->with('branches', $lBranches)
+                        ->with('types', $lTypes);
         }
         else
         {
@@ -78,17 +82,17 @@ class SUnitsController extends Controller
      */
     public function store(Request $request)
     {
-      $unit = new SUnit($request->all());
+      $whs = new SWarehouse($request->all());
 
-      $unit->is_deleted = \Config::get('scsys.STATUS.ACTIVE');
-      $unit->updated_by_id = \Auth::user()->id;
-      $unit->created_by_id = \Auth::user()->id;
+      $whs->is_deleted = \Config::get('scsys.STATUS.ACTIVE');
+      $whs->updated_by_id = \Auth::user()->id;
+      $whs->created_by_id = \Auth::user()->id;
 
-      $unit->save();
+      $whs->save();
 
       Flash::success(trans('messages.REG_CREATED'));
 
-      return redirect()->route('wms.units.index');
+      return redirect()->route('wms.whs.index');
     }
 
     /**
@@ -110,14 +114,17 @@ class SUnitsController extends Controller
      */
     public function edit($id)
     {
-        $unit = SUnit::find($id);
+        $whs = SWarehouse::find($id);
 
-        if (SValidation::canEdit($this->oCurrentUserPermission->privilege_id) || SValidation::canAuthorEdit($this->oCurrentUserPermission->privilege_id, $unit->created_by_id))
+        if (SValidation::canEdit($this->oCurrentUserPermission->privilege_id) || SValidation::canAuthorEdit($this->oCurrentUserPermission->privilege_id, $whs->created_by_id))
         {
-            $unitsEq = SUnit::orderBy('name', 'ASC')->lists('name', 'id_unit');
+          $lTypes = SWhsType::orderBy('name', 'ASC')->lists('name', 'id_type');
+          $lBranches = SBranch::orderBy('name', 'ASC')->lists('name', 'id_branch');
 
-            return view('wms.units.createEdit')->with('unit', $unit)
-                                            ->with('unitseq', $unitsEq);
+          return view('wms.whs.createEdit')
+                      ->with('whs', $whs)
+                      ->with('branches', $lBranches)
+                      ->with('types', $lTypes);
         }
         else
         {
@@ -134,14 +141,14 @@ class SUnitsController extends Controller
      */
     public function update(Request $request, $id)
     {
-        $unit = SUnit::find($id);
-        $unit->fill($request->all());
-        $unit->updated_by_id = \Auth::user()->id;
-        $unit->save();
+        $whs = SWarehouse::find($id);
+        $whs->fill($request->all());
+        $whs->updated_by_id = \Auth::user()->id;
+        $whs->save();
 
         Flash::warning(trans('messages.REG_EDITED'));
 
-        return redirect()->route('wms.units.index');
+        return redirect()->route('wms.whs.index');
     }
 
     /**
@@ -152,28 +159,29 @@ class SUnitsController extends Controller
      */
     public function copy(Request $request, $id)
     {
-        $unit = SUnit::find($id);
+        $whs = SWarehouse::find($id);
 
-        $unitCopy = clone $unit;
-        $unitCopy->id_bp = 0;
+        $whsCopy = clone $whs;
+        $whsCopy->id_whs = 0;
 
-        return view('wms.units.createEdit')->with('unit', $unitCopy)
+        return view('wms.whs.createEdit')->with('whs', $whsCopy)
+                                      ->with('sClassNav', (session()->has('menu') ? session('menu')->getClassNav() : ''))
                                       ->with('bIsCopy', true);
     }
 
     public function activate(Request $request, $id)
     {
-        $unit = SUnit::find($id);
+        $whs = SWarehouse::find($id);
 
-        $unit->fill($request->all());
-        $unit->is_deleted = \Config::get('scsys.STATUS.ACTIVE');
-        $unit->updated_by_id = \Auth::user()->id;
+        $whs->fill($request->all());
+        $whs->is_deleted = \Config::get('scsys.STATUS.ACTIVE');
+        $whs->updated_by_id = \Auth::user()->id;
 
-        $unit->save();
+        $whs->save();
 
         Flash::success(trans('messages.REG_ACTIVATED'));
 
-        return redirect()->route('wms.units.index');
+        return redirect()->route('wms.whs.index');
     }
 
     /**
@@ -186,16 +194,16 @@ class SUnitsController extends Controller
     {
         if (SValidation::canDestroy($this->oCurrentUserPermission->privilege_id))
         {
-          $unit = SUnit::find($id);
-          $unit->fill($request->all());
-          $unit->is_deleted = \Config::get('scsys.STATUS.DEL');
-          $unit->updated_by_id = \Auth::user()->id;
+          $whs = SWarehouse::find($id);
+          $whs->fill($request->all());
+          $whs->is_deleted = \Config::get('scsys.STATUS.DEL');
+          $whs->updated_by_id = \Auth::user()->id;
 
-          $unit->save();
+          $whs->save();
           #$user->delete();
 
           Flash::error(trans('messages.REG_DELETED'));
-          return redirect()->route('wms.units.index');
+          return redirect()->route('wms.whs.index');
         }
         else
         {

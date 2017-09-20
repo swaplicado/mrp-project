@@ -1,4 +1,9 @@
 @extends('front.mainCapturaEdicion')
+
+@section('menu')
+	@include('front.templates.menumodules')
+@endsection
+
 @if(isset($bpartner))
 	<?php
 			$sRoute = 'mrp.bps.update';

@@ -1,4 +1,9 @@
 @extends('front.mainCapturaEdicion')
+
+@section('menu')
+	@include('front.templates.menumodules')
+@endsection
+
 <?php
     $sRoute='mrp.companies.update';
     $aux=$company;

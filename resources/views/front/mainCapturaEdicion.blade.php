@@ -2,7 +2,8 @@
 <html lang="es">
 	@include('front.templates.head')
 <body>
-			@include('front.templates.menu')
+	
+	@yield('menu')
 
 	<div class="container">
 

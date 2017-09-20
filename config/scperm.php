@@ -13,11 +13,11 @@ return [
   'UNDEFINED' => '0',
 
   'MODULES'   =>  [
-                  'MRP' => '5',
-                  'MMS' => '1',
-                  'QMS' => '2',
-                  'WMS' => '3',
-                  'TMS' => '4',
+                  'MRP' => '005',
+                  'MMS' => '001',
+                  'QMS' => '002',
+                  'WMS' => '003',
+                  'TMS' => '004',
                 ],
 
   'VIEW_CODE' => [
@@ -33,5 +33,13 @@ return [
                   'MONTHS' => '010',
                   'BPS' => '011',
                   'UNITS' => '012',
+                  'WAREHOUSES' => '013',
+                  'LOCATIONS' => '014',
+                  'ITM_FAM' => '015',
+                  'ITM_GRP' => '016',
+                  'IMT_GEN' => '017',
+                  'ITEMS' => '018',
+                  'ITEM_UNIT' => '019',
+                  'BARCODES' => '020',
                 ],
 ];

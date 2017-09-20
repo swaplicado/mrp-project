@@ -34,6 +34,7 @@
 											'LIST_MONTHS' => 'Periodos',
 											'LIST_BPS' => 'Asociados de negocios',
 											'LIST_UNITS' => 'Unidades',
+											'LIST_WAREHOUSES' => 'Almacenes',
 											'CREATE_USER' => 'Crear usuario',
 											'CREATE_PERMISSION' => 'Crear usuario',
 											'CREATE_ASSIGNAMENT' => 'Crear asignación',
@@ -42,6 +43,7 @@
 											'CREATE_YEAR' => 'Crear año',
 											'CREATE_BP' => 'Crear asociado',
 											'CREATE_UNIT' => 'Crear unidad',
+											'CREATE_WAREHOUSE' => 'Crear almacén',
 											'EDIT_USER' => 'Editar usuario',
 											'EDIT_PERMISSION' => 'Editar permiso',
 											'EDIT_ASSIGNAMENT' => 'Editar asignación',
@@ -50,7 +52,8 @@
 											'EDIT_BRANCH' => 'Editar sucursal',
 											'EDIT_YEAR' => 'Editar año',
 											'EDIT_BP' => 'Editar asociado',
-											'EDIT_UNIT' => 'Editar Unidad',
+											'EDIT_UNIT' => 'Editar unidad',
+											'EDIT_WAREHOUSE' => 'Editar almacén',
 											'SELECT_COMPANY' => 'Seleccione empresa:',
 											'SELECT_MODULE' => 'Seleccione Módulo',
 											],
@@ -94,6 +97,9 @@
 											'UNIT_EQ' => 'Unidad equivalente...',
 											'SYMBOL' => 'Símbolo...',
 											'EQUIVALENCE' => 'Equivalencia...',
+											'WAREHOUSE' => 'Nombre almacén...',
+											'WHS_TYPE' => 'Tipo almacén...',
+
 											],
 
 		'tooltips'     	=>   [
@@ -155,6 +161,7 @@
 											'IS_EMPL' => 'Empleado',
 											'IS_AGTS' => 'Agt vtas.',
 											'IS_PART' => 'Socio',
+											'WAREHOUSE' => 'Almacén',
 											'WEB' => 'Web',
 
 										]

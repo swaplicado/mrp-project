@@ -1,4 +1,9 @@
 @extends('front.mainCapturaEdicion')
+
+@section('menu')
+	@include('front.templates.menumodules')
+@endsection
+
 @if(isset($month))
 	<?php
 			$sRoute = 'mrp.months.update';

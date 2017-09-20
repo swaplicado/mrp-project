@@ -178,7 +178,7 @@ class MrpAddWhsUnitsTable extends Migration {
           $this->sDataBase = $base;
           SUtil::reconnectDataBase($this->sConnection, $this->bDefault, $this->sHost, $this->sDataBase, $this->sUser, $this->sPassword);
 
-          Schema::connection($this->sConnection)->drop('wmss_barcode_types');
+          Schema::connection($this->sConnection)->drop('wms_units');
         }
     }
 }

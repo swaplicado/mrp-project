@@ -67,7 +67,7 @@ class SMMenu
               $menu->get(trans('wms.CONFIG'))->add(trans('wms.CONFIG'), 'what-we-do');
               $menu->get(trans('wms.CONFIG'))->add(trans('wms.CONFIG'), 'what-we-do');
               $menu->add(trans('wms.CATALOGUES'), 'what-we-do')->nickname(trans('wms.CATALOGUES'));
-              $menu->get(trans('wms.CATALOGUES'))->add(trans('wms.WAREHOUSES'), 'what-we-do');
+              $menu->get(trans('wms.CATALOGUES'))->add(trans('wms.WAREHOUSES'), array('route' => 'wms.whs.index'));
               $menu->get(trans('wms.CATALOGUES'))->add(trans('wms.LOCATIONS'), 'what-we-do');
               $menu->get(trans('wms.CATALOGUES'))->add(trans('wms.PALLETS'), 'what-we-do');
               $menu->get(trans('wms.CATALOGUES'))->add(trans('wms.LOTS'), 'what-we-do');

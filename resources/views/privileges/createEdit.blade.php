@@ -1,4 +1,9 @@
 @extends('front.mainCapturaEdicion')
+
+@section('menu')
+	@include('front.templates.menu')
+@endsection
+
 @if(isset($privilege))
 	<?php
 			$sRoute='privileges.update';
