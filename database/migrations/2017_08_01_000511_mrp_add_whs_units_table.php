@@ -38,7 +38,7 @@ class MrpAddWhsUnitsTable extends Migration {
 
           Schema::connection($this->sConnection)->create('wms_units', function (blueprint $table) {
           	$table->increments('id_unit');
-          	$table->char('code', 25);
+            $table->char('code', 25);
           	$table->char('name', 255);
           	$table->decimal('unit_base_equivalence_opt', 23,8);
           	$table->integer('cfd_unit_id')->unsigned();

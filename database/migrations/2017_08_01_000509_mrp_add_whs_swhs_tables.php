@@ -50,7 +50,7 @@ class MrpAddWhsSwhsTables extends Migration {
 
           Schema::connection($this->sConnection)->create('wmss_whs_types', function (blueprint $table) {
           	$table->increments('id_type');
-          	$table->char('code', 5);
+          	$table->char('code', 5)->unique();
           	$table->char('name', 50);
           	$table->boolean('is_deleted');
           });

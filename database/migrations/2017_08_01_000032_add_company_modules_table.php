@@ -19,6 +19,7 @@ class AddCompanyModulesTable extends Migration
       	$table->integer('module_id')->unsigned();
       	$table->timestamps();
 
+        $table->unique(['company_id', 'module_id']);
       	$table->foreign('company_id')->references('id_company')->on('sys_companies')->onDelete('cascade');
       	$table->foreign('module_id')->references('id_module')->on('syss_modules')->onDelete('cascade');
       });

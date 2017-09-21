@@ -38,7 +38,7 @@ class MrpAddComBranchesTable extends Migration {
 
           Schema::connection($this->sConnection)->create('mrp_company_branches', function (blueprint $table) {
           	$table->increments('id_branch');
-          	$table->char('code', 5);
+            $table->char('code', 5)->unique();
           	$table->char('name', 100);
           	$table->boolean('is_deleted');
             $table->integer('company_id')->unsigned();

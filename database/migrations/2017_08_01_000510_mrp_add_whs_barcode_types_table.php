@@ -38,7 +38,7 @@ class MrpAddWhsBarcodeTypesTable extends Migration {
 
           Schema::connection($this->sConnection)->create('wmss_barcode_types', function (blueprint $table) {
           	$table->increments('id_type');
-          	$table->char('code', 5);
+            $table->char('code', 25)->unique();
           	$table->char('name', 50);
           	$table->boolean('is_deleted');
           });

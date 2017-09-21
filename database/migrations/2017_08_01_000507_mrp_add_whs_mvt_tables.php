@@ -38,7 +38,7 @@ class MrpAddWhsMvtTables extends Migration {
 
           Schema::connection($this->sConnection)->create('wmss_mvt_whs_classes', function (blueprint $table) {
           	$table->increments('id_class');
-          	$table->char('code', 5);
+            $table->char('code', 5)->unique();
           	$table->char('name', 50);
           	$table->boolean('is_deleted');
           });
@@ -51,7 +51,7 @@ class MrpAddWhsMvtTables extends Migration {
           Schema::connection($this->sConnection)->create('wmss_mvt_whs_types', function (blueprint $table) {
           	$table->increments('id_whs_type');
           	$table->integer('id_type');
-          	$table->char('code', 5);
+          	$table->char('code', 5)->unique();
           	$table->char('name', 50);
           	$table->boolean('is_deleted');
           	$table->integer('class_id')->unsigned();
@@ -79,7 +79,7 @@ class MrpAddWhsMvtTables extends Migration {
 
           Schema::connection($this->sConnection)->create('wmss_mvt_spt_types', function (blueprint $table) {
           	$table->increments('id_type');
-          	$table->char('code', 5);
+          	$table->char('code', 5)->unique();
           	$table->char('name', 50);
           	$table->boolean('is_deleted');
           });
@@ -93,7 +93,7 @@ class MrpAddWhsMvtTables extends Migration {
 
           Schema::connection($this->sConnection)->create('wmss_mvt_mfg_types', function (blueprint $table) {
           	$table->increments('id_type');
-          	$table->char('code', 5);
+          	$table->char('code', 5)->unique();
           	$table->char('name', 50);
           	$table->boolean('is_deleted');
           });
@@ -105,7 +105,7 @@ class MrpAddWhsMvtTables extends Migration {
 
           Schema::connection($this->sConnection)->create('wmss_mvt_adj_types', function (blueprint $table) {
           	$table->increments('id_type');
-          	$table->char('code', 5);
+          	$table->char('code', 5)->unique();
           	$table->char('name', 50);
           	$table->boolean('is_deleted');
           });
@@ -128,7 +128,7 @@ class MrpAddWhsMvtTables extends Migration {
 
           Schema::connection($this->sConnection)->create('wmss_mvt_exp_types', function (blueprint $table) {
           	$table->increments('id_type');
-          	$table->char('code', 5);
+          	$table->char('code', 5)->unique();
           	$table->char('name', 50);
           	$table->boolean('is_deleted');
           });

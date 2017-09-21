@@ -12,17 +12,18 @@ class AddUsrPerCompnsTable extends Migration
      */
     public function up()
     {
-        Schema::connection('ssystem')->create('sys_usr_per_cmpns', function (blueprint $table) {
-        	$table->increments('id_usr_per_comp');
-        	$table->integer('user_id')->unsigned();
-        	$table->integer('permission_id')->unsigned();
-        	$table->integer('company_id')->unsigned();
-        	$table->integer('created_by_id')->unsigned();
-        	$table->timestamps();
+      Schema::create('sys_com_usr_prmssns', function (blueprint $table) {
+        $table->increments('id_cup');
+        $table->integer('user_id')->unsigned();
+        $table->integer('permission_id')->unsigned();
+        $table->integer('company_id')->unsigned();
+        $table->integer('created_by_id')->unsigned();
+        $table->timestamps();
 
-        	$table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
-        	$table->foreign('company_id')->references('id_company')->on('sys_companies')->onDelete('cascade');
-        	$table->foreign('created_by_id')->references('id')->on('users')->onDelete('cascade');
+        $table->unique(['user_id','permission_id','company_id']);
+        $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
+        $table->foreign('company_id')->references('id_company')->on('sys_companies')->onDelete('cascade');
+        $table->foreign('created_by_id')->references('id')->on('users')->onDelete('cascade');
 
         });
     }
@@ -34,6 +35,6 @@ class AddUsrPerCompnsTable extends Migration
      */
     public function down()
     {
-        Schema::drop('sys_usr_per_cmpns');
+      Schema::drop('sys_com_usr_prmssns');
     }
 }

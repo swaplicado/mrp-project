@@ -38,7 +38,7 @@ class MrpAddWhsWhsTable extends Migration {
 
           Schema::connection($this->sConnection)->create('wms_warehouses', function (blueprint $table) {
           	$table->increments('id_whs');
-          	$table->char('code', 5);
+            $table->char('code', 25)->unique();
           	$table->char('name', 100);
           	$table->boolean('is_deleted');
           	$table->integer('branch_id')->unsigned();

@@ -18,6 +18,7 @@ class AddUserPermissionsTable extends Migration
       	$table->integer('permission_id')->unsigned();
       	$table->integer('privilege_id')->unsigned();
 
+        $table->unique(['user_id','permission_id','privilege_id']);
       	$table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
       	$table->foreign('permission_id')->references('id_module')->on('syss_modules')->onDelete('cascade');
       	$table->foreign('privilege_id')->references('id_privilege')->on('syss_privileges')->onDelete('cascade');

@@ -34,6 +34,7 @@ class AddPermissionsTable extends Migration
       	$table->integer('module_id')->unsigned();
       	$table->timestamps();
 
+        $table->unique(['code_mrp']);
       	$table->foreign('permission_type_id')->references('id_type')->on('syss_permission_types')->onDelete('cascade');
         $table->foreign('module_id')->references('id_module')->on('syss_modules')->onDelete('cascade');
       });
