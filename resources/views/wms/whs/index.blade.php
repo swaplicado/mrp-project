@@ -15,6 +15,8 @@
 		<thead>
 			<th>{{ trans('userinterface.labels.CODE') }}</th>
 			<th>{{ trans('userinterface.labels.WAREHOUSE') }}</th>
+			<th>{{ trans('userinterface.labels.TYPE') }}</th>
+			<th>{{ trans('userinterface.labels.BRANCH') }}</th>
 			<th>{{ trans('userinterface.labels.STATUS') }}</th>
 			<th>{{ trans('userinterface.labels.ACTION') }}</th>
 		</thead>
@@ -23,6 +25,8 @@
 				<tr>
 					<td>{{ $whs->code }}</td>
 					<td>{{ $whs->name }}</td>
+					<td>{{ $whs->whsType->name }}</td>
+					<td>{{ $whs->branch->name }}</td>
 					<td>
 						@if (! $whs->is_deleted)
 								<span class="label label-success">{{ trans('userinterface.labels.ACTIVE') }}</span>

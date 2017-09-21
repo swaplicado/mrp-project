@@ -170,6 +170,20 @@ Route::group(['middleware' => ['auth']], function() {
         'uses' => 'SWMS\SWarehousesController@Copy',
         'as' => 'wms.whs.copy'
       ]);
+
+      Route::resource('locs','SWMS\SLocationsController');
+      Route::get('locs/{id}/destroy',[
+        'uses' => 'SWMS\SLocationsController@Destroy',
+        'as' => 'wms.locs.destroy'
+      ]);
+      Route::get('locs/{id}/activate', [
+        'uses' => 'SWMS\SLocationsController@Activate',
+        'as' => 'wms.locs.activate'
+      ]);
+      Route::get('locs/{id}/copy', [
+        'uses' => 'SWMS\SLocationsController@Copy',
+        'as' => 'wms.locs.copy'
+      ]);
   });
 
 

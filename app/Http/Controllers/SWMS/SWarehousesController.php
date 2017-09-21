@@ -164,9 +164,13 @@ class SWarehousesController extends Controller
         $whsCopy = clone $whs;
         $whsCopy->id_whs = 0;
 
+        $lTypes = SWhsType::orderBy('name', 'ASC')->lists('name', 'id_type');
+        $lBranches = SBranch::orderBy('name', 'ASC')->lists('name', 'id_branch');
+
         return view('wms.whs.createEdit')->with('whs', $whsCopy)
-                                      ->with('sClassNav', (session()->has('menu') ? session('menu')->getClassNav() : ''))
-                                      ->with('bIsCopy', true);
+                                        ->with('branches', $lBranches)
+                                        ->with('types', $lTypes)
+                                        ->with('bIsCopy', true);
     }
 
     public function activate(Request $request, $id)
