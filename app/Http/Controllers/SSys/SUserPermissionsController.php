@@ -84,7 +84,7 @@ class SUserPermissionsController extends Controller
 
         $userPermission->save();
 
-        Flash::success(trans('messages.REG_CREATED'));
+        Flash::success(trans('messages.REG_CREATED'))->important();
 
         return redirect()->route('userPermissions.index');
     }
@@ -159,7 +159,7 @@ class SUserPermissionsController extends Controller
 
       $userPermission->save();
 
-      Flash::success(trans('messages.REG_ACTIVATED'));
+      Flash::success(trans('messages.REG_ACTIVATED'))->important();
 
       return redirect()->route('userPermissions.index');
     }
@@ -181,7 +181,7 @@ class SUserPermissionsController extends Controller
 
             $userPermission->save();
             #$userPermission->delete();
-            Flash::error(trans('messages.REG_DELETED'));
+            Flash::error(trans('messages.REG_DELETED'))->important();
 
             return redirect()->route('userPermissions.index');
         }

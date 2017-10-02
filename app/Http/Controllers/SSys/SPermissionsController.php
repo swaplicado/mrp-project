@@ -69,7 +69,7 @@ class SPermissionsController extends Controller
         $permission = new SPermission($request->all());
         $permission->save();
 
-        Flash::success(trans('messages.REG_CREATED'));
+        Flash::success(trans('messages.REG_CREATED'))->important();
 
         return redirect()->route('permissions.index');
     }
@@ -121,7 +121,7 @@ class SPermissionsController extends Controller
         $permission->fill($request->all());
         $permission->save();
 
-        Flash::warning(trans('messages.REG_EDITED'));
+        Flash::warning(trans('messages.REG_EDITED'))->important();
         return redirect()->route('permissions.index');
     }
 
@@ -155,7 +155,7 @@ class SPermissionsController extends Controller
 
           $permission->save();
           #$permission->delete();
-          Flash::error(trans('messages.REG_DELETED'));
+          Flash::error(trans('messages.REG_DELETED'))->important();
 
           return redirect()->route('permissions.index');
         }

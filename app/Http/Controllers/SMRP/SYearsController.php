@@ -99,7 +99,7 @@ class SYearsController extends Controller
 
         if ($success)
         {
-            Flash::success(trans('messages.REG_CREATED'));
+            Flash::success(trans('messages.REG_CREATED'))->important();
         }
         else
         {
@@ -149,7 +149,7 @@ class SYearsController extends Controller
 
        $oYear->save();
 
-       Flash::warning(trans('messages.REG_EDITED'));
+       Flash::warning(trans('messages.REG_EDITED'))->important();
 
        return redirect()->route('mrp.years.index');
      }
@@ -164,7 +164,7 @@ class SYearsController extends Controller
 
        $oYear->save();
 
-       Flash::success(trans('messages.REG_ACTIVATED'));
+       Flash::success(trans('messages.REG_ACTIVATED'))->important();
 
        return redirect()->route('mrp.years.index');
      }
@@ -185,7 +185,7 @@ class SYearsController extends Controller
        $oYear->save();
        #$user->delete();
 
-       Flash::error(trans('messages.REG_DELETED'));
+       Flash::error(trans('messages.REG_DELETED'))->important();
 
        return redirect()->route('mrp.years.index');
      }

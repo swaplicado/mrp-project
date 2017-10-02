@@ -2,43 +2,20 @@
 
 use Illuminate\Database\Eloquent\Model;
 
-class SWarehouse extends Model {
+class SItemFamily extends Model {
 
   protected $connection = 'mrp';
-  protected $primaryKey = 'id_whs';
-  protected $table = "wms_warehouses";
-
-  public function getTable()
-  {
-    return $this->table;
-  }
+  protected $primaryKey = 'id_family';
+  protected $table = "wms_item_families";
 
   protected $fillable = [
-                          'code',
                           'name',
                           'is_deleted',
-                          'branch_id',
-                          'whs_type_id_opt',
                         ];
 
-  public function whsType()
+  public function groups()
   {
-    return $this->belongsTo('App\SWMS\SWhsType', 'whs_type_id_opt');
-  }
-
-  public function branch()
-  {
-    return $this->belongsTo('App\SMRP\SBranch', 'branch_id');
-  }
-
-  public function userCreation()
-  {
-    return $this->belongsTo('App\User', 'created_by_id');
-  }
-
-  public function userUpdate()
-  {
-    return $this->belongsTo('App\User', 'updated_by_id');
+    return $this->hasMany('App\SWMS\SItemGroup');
   }
 
   public function scopeSearch($query, $name, $iFilter)

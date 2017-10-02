@@ -66,7 +66,7 @@ class SPrivilegesController extends Controller
         $privilege = new SPrivilege($request->all());
         $privilege->save();
 
-        Flash::success(trans('messages.REG_CREATED'));
+        Flash::success(trans('messages.REG_CREATED'))->important();
 
         return redirect()->route('privileges.index');
     }
@@ -117,7 +117,7 @@ class SPrivilegesController extends Controller
         $privilege->fill($request->all());
         $privilege->save();
 
-        Flash::warning(trans('messages.REG_EDITED'));
+        Flash::warning(trans('messages.REG_EDITED'))->important();
         return redirect()->route('privileges.index');
     }
 
@@ -130,7 +130,7 @@ class SPrivilegesController extends Controller
 
       $privilege->save();
 
-      Flash::success(trans('messages.REG_ACTIVATED'));
+      Flash::success(trans('messages.REG_ACTIVATED'))->important();
 
       return redirect()->route('privileges.index');
     }
@@ -152,7 +152,7 @@ class SPrivilegesController extends Controller
 
         $privilege->save();
         #$privilege->delete();
-        Flash::error(trans('messages.REG_DELETED'));
+        Flash::error(trans('messages.REG_DELETED'))->important();
 
         return redirect()->route('privileges.index');
       }

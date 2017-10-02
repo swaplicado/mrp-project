@@ -2,26 +2,25 @@
 
 use Illuminate\Database\Eloquent\Model;
 
-class SWhsType extends Model {
+class SItemClass extends Model {
 
   protected $connection = 'mrp';
-  protected $primaryKey = 'id_type';
-  protected $table = "wmss_whs_types";
+  protected $primaryKey = 'id_class';
+  protected $table = "wmss_item_classes";
 
-  public function getTable()
+  public static function getTable()
   {
     return $this->table;
   }
 
   protected $fillable = [
-                          'code',
                           'name',
                           'is_deleted',
                         ];
 
-  public function warehouses()
+  public function types()
   {
-    return $this->hasMany('App\SWMS\SWarehouse');
+    return $this->hasMany('App\SWMS\SItemType');
   }
 
 }

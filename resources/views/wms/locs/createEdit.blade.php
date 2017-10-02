@@ -6,7 +6,14 @@
 
 @if(isset($location))
 	<?php
-			$sRoute = 'wms.locs.update';
+			if (isset($bIsCopy))
+			{
+				$sRoute = 'wms.locs.store';
+			}
+			else
+			{
+				$sRoute = 'wms.locs.update';
+			}
 			$aux = $location;
 	?>
 	@section('title', trans('userinterface.titles.EDIT_LOCATION'))
@@ -34,7 +41,7 @@
 
 		<div class="form-group">
 			{!! Form::label('whs_id', trans('userinterface.labels.WAREHOUSE')) !!}
-			{!! Form::select('whs_id', $warehouses, isset($location) ?  $location->whs_id : null , ['class'=>'form-control', 'placeholder' => trans('userinterface.placeholders.WAREHOUSE')]) !!}
+			{!! Form::select('whs_id', $warehouses, isset($location) ?  $location->whs_id : null , ['class'=>'form-control', 'placeholder' => trans('userinterface.placeholders.WAREHOUSE'), 'required']) !!}
 		</div>
 
 @endsection

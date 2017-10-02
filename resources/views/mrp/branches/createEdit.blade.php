@@ -6,8 +6,15 @@
 
 @if(isset($branch))
 	<?php
-			$sRoute = 'mrp.branches.update';
 			$aux = $branch;
+			if (isset($bIsCopy))
+			{
+				$sRoute = 'mrp.branches.store';
+			}
+			else
+			{
+				$sRoute = 'mrp.branches.update';
+			}
 	?>
 	@section('title', trans('userinterface.titles.EDIT_BRANCH'))
 @else

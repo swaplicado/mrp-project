@@ -23,7 +23,7 @@
 
 		<div class="form-group">
 			{!! Form::label('name','Name') !!}
-			{!! Form::text('name',isset($privilege) ? $privilege->name : null ,['class'=>'form-control', 'placeholder' => 'Nombre del privilegio','required']) !!}
+			{!! Form::text('name',isset($privilege) ? $privilege->name : null ,['class'=>'form-control', 'placeholder' => 'Nombre del privilegio', 'required']) !!}
 		</div>
 
 @endsection

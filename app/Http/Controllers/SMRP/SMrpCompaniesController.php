@@ -82,7 +82,7 @@ class SMrpCompaniesController extends Controller
        $company->updated_by_id = \Auth::user()->id;
        $company->save();
 
-       Flash::warning(trans('messages.REG_EDITED'));
+       Flash::warning(trans('messages.REG_EDITED'))->important();
 
        return redirect()->route('mrp.companies.index');
      }
@@ -97,7 +97,7 @@ class SMrpCompaniesController extends Controller
 
        $company->save();
 
-       Flash::success(trans('messages.REG_ACTIVATED'));
+       Flash::success(trans('messages.REG_ACTIVATED'))->important();
 
        return redirect()->route('mrp.companies.index');
      }
@@ -118,7 +118,7 @@ class SMrpCompaniesController extends Controller
        $company->save();
        #$user->delete();
 
-       Flash::error(trans('messages.REG_DELETED'));
+       Flash::error(trans('messages.REG_DELETED'))->important();
 
        return redirect()->route('mrp.companies.index');
      }

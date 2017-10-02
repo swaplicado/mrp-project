@@ -128,14 +128,14 @@ Route::group(['middleware' => ['auth']], function() {
 		]);
 		Route::resource('mms','SMMS\SProductionController');
 
-//****************************************/ Quality /*************************
+//****************************************/ Quality Module /*************************
 		Route::get('/qms/home',[
 			'as' => 'qms.home',
 			'uses' => 'SQMS\SQualityController@Home'
 		]);
 		Route::resource('qms','SQMS\SQualityController');
 
-//****************************************/ Warehouses /*************************
+//****************************************/ Warehouses Module/*************************
 
   Route::group(['prefix' => 'wms'], function () {
   		Route::get('/home',[
@@ -143,6 +143,10 @@ Route::group(['middleware' => ['auth']], function() {
   			'uses' => 'SWMS\SWmsController@Home'
   		]);
   		Route::resource('wms','SWMS\SWmsController');
+
+      /*
+      * Units
+      **/
 
       Route::resource('units','SWMS\SUnitsController');
       Route::get('units/{id}/destroy',[
@@ -157,6 +161,10 @@ Route::group(['middleware' => ['auth']], function() {
         'uses' => 'SWMS\SUnitsController@Copy',
         'as' => 'wms.units.copy'
       ]);
+
+      /*
+      * Warehouses
+      **/
       Route::resource('whs','SWMS\SWarehousesController');
       Route::get('whs/{id}/destroy',[
         'uses' => 'SWMS\SWarehousesController@Destroy',
@@ -171,6 +179,9 @@ Route::group(['middleware' => ['auth']], function() {
         'as' => 'wms.whs.copy'
       ]);
 
+      /*
+      * Locations
+      **/
       Route::resource('locs','SWMS\SLocationsController');
       Route::get('locs/{id}/destroy',[
         'uses' => 'SWMS\SLocationsController@Destroy',
@@ -183,6 +194,40 @@ Route::group(['middleware' => ['auth']], function() {
       Route::get('locs/{id}/copy', [
         'uses' => 'SWMS\SLocationsController@Copy',
         'as' => 'wms.locs.copy'
+      ]);
+
+      /*
+      * Families
+      **/
+      Route::resource('families','SWMS\SFamiliesController');
+      Route::get('families/{id}/destroy',[
+        'uses' => 'SWMS\SFamiliesController@Destroy',
+        'as' => 'wms.families.destroy'
+      ]);
+      Route::get('families/{id}/activate', [
+        'uses' => 'SWMS\SFamiliesController@Activate',
+        'as' => 'wms.families.activate'
+      ]);
+      Route::get('families/{id}/copy', [
+        'uses' => 'SWMS\SFamiliesController@Copy',
+        'as' => 'wms.families.copy'
+      ]);
+
+      /*
+      * Groups
+      **/
+      Route::resource('groups','SWMS\SGroupsController');
+      Route::get('groups/{id}/destroy',[
+        'uses' => 'SWMS\SGroupsController@Destroy',
+        'as' => 'wms.groups.destroy'
+      ]);
+      Route::get('groups/{id}/activate', [
+        'uses' => 'SWMS\SGroupsController@Activate',
+        'as' => 'wms.groups.activate'
+      ]);
+      Route::get('groups/{id}/copy', [
+        'uses' => 'SWMS\SGroupsController@Copy',
+        'as' => 'wms.groups.copy'
       ]);
   });
 

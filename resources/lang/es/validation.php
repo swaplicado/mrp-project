@@ -103,6 +103,17 @@ return [
         'attribute-name' => [
             'rule-name' => 'custom-message',
         ],
+        'family_id' => [
+            'exists' => 'El id de familia no existe.',
+        ],
+        'branch_id' => [
+            'required' => 'El campo sucursal es obligatorio.',
+        ],
+        'code' => [
+            'unique' => 'El código ya está en uso.',
+            'required' => 'El campo código es obligatorio.',
+        ],
+
     ],
 
     /*

@@ -6,7 +6,14 @@
 
 @if(isset($year))
 	<?php
-			$sRoute = 'mrp.years.update';
+			if (isset($bIsCopy))
+			{
+				$sRoute = 'mrp.years.store';
+			}
+			else
+			{
+				$sRoute = 'mrp.years.update';
+			}
 			$aux = $year;
 	?>
 	@section('title', trans('userinterface.titles.EDIT_YEAR'))

@@ -5,6 +5,7 @@ use Illuminate\Http\Request;
 use App\Http\Requests;
 use App\Http\Controllers\Controller;
 
+use App\Http\Requests\SWMS\SWhsRequest;
 use Laracasts\Flash\Flash;
 use App\SUtils\SUtil;
 use App\SUtils\SMenu;
@@ -80,17 +81,18 @@ class SWarehousesController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(SWhsRequest $request)
     {
       $whs = new SWarehouse($request->all());
 
       $whs->is_deleted = \Config::get('scsys.STATUS.ACTIVE');
       $whs->updated_by_id = \Auth::user()->id;
       $whs->created_by_id = \Auth::user()->id;
+      $whs->whs_type_id_opt = $whs->whs_type_id_opt == '' ? NULL : $whs->whs_type_id_opt;
 
       $whs->save();
 
-      Flash::success(trans('messages.REG_CREATED'));
+      Flash::success(trans('messages.REG_CREATED'))->important();
 
       return redirect()->route('wms.whs.index');
     }
@@ -146,7 +148,7 @@ class SWarehousesController extends Controller
         $whs->updated_by_id = \Auth::user()->id;
         $whs->save();
 
-        Flash::warning(trans('messages.REG_EDITED'));
+        Flash::warning(trans('messages.REG_EDITED'))->important();
 
         return redirect()->route('wms.whs.index');
     }
@@ -183,7 +185,7 @@ class SWarehousesController extends Controller
 
         $whs->save();
 
-        Flash::success(trans('messages.REG_ACTIVATED'));
+        Flash::success(trans('messages.REG_ACTIVATED'))->important();
 
         return redirect()->route('wms.whs.index');
     }
@@ -206,7 +208,7 @@ class SWarehousesController extends Controller
           $whs->save();
           #$user->delete();
 
-          Flash::error(trans('messages.REG_DELETED'));
+          Flash::error(trans('messages.REG_DELETED'))->important();
           return redirect()->route('wms.whs.index');
         }
         else

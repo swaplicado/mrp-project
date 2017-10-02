@@ -6,7 +6,14 @@
 
 @if(isset($bpartner))
 	<?php
-			$sRoute = 'mrp.bps.update';
+			if (isset($bIsCopy))
+			{
+				$sRoute = 'mrp.bps.store';
+			}
+			else
+			{
+				$sRoute = 'mrp.bps.update';
+			}
 			$aux = $bpartner;
 	?>
 	@section('title', trans('userinterface.titles.EDIT_BRANCH'))

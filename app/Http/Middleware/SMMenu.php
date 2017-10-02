@@ -24,14 +24,14 @@ class SMMenu
       switch ($iModule) {
         case \Config::get('scsys.MODULES.MRP'):
           \Menu::make('sMenu', function($menu) {
-              $menu->add('Home', array('route' => 'mms.home'));
+              $menu->add('Home', ['route' => 'mms.home']);
               $menu->add(trans('mrp.MRP'), '')->nickname(trans('mrp.MRP'));
-              $menu->get(trans('mrp.MRP'))->add(trans('mrp.MRP_COMPANIES'), array('route' => 'mrp.companies.index'));
-              $menu->get(trans('mrp.MRP'))->add(trans('mrp.BRANCHES'), array('route' => 'mrp.branches.index'));
-              $menu->get(trans('mrp.MRP'))->add(trans('mrp.ACG_YEAR_PER'), array('route' => 'mrp.years.index'));
-              $menu->get(trans('mrp.MRP'))->add(trans('mrp.BPS'), array('route' => 'mrp.bps.index'));
+              $menu->get(trans('mrp.MRP'))->add(trans('mrp.MRP_COMPANIES'), ['route' => 'mrp.companies.index']);
+              $menu->get(trans('mrp.MRP'))->add(trans('mrp.BRANCHES'), ['route' => 'mrp.branches.index']);
+              $menu->get(trans('mrp.MRP'))->add(trans('mrp.ACG_YEAR_PER'), ['route' => 'mrp.years.index']);
+              $menu->get(trans('mrp.MRP'))->add(trans('mrp.BPS'), ['route' => 'mrp.bps.index']);
               $menu->add(trans('mrp.CATALOGUES'), '')->nickname(trans('mrp.CATALOGUES'));
-              $menu->get(trans('mrp.CATALOGUES'))->add(trans('wms.UNITS'), array('route' => 'wms.units.index'));
+              $menu->get(trans('mrp.CATALOGUES'))->add(trans('wms.UNITS'), ['route' => 'wms.units.index']);
           });
 
           break;
@@ -39,7 +39,7 @@ class SMMenu
         case \Config::get('scsys.MODULES.MMS'):
           \Menu::make('sMenu', function($menu) {
               $menu->add(' ');
-              $menu->add('Home', array('route' => 'mms.home'));
+              $menu->add('Home', ['route' => 'mms.home']);
               $menu->add('About',    'about');
               $menu->add('Services', 'services');
               $menu->add('Contact',  'contact');
@@ -50,7 +50,7 @@ class SMMenu
         case \Config::get('scsys.MODULES.QMS'):
           \Menu::make('sMenu', function($menu) {
               $menu->add(' ');
-              $menu->add('Home', array('route' => 'qms.home'));
+              $menu->add('Home', ['route' => 'qms.home']);
               $menu->add('About',    'about');
               $menu->add('Services', 'services');
               $menu->add('Contact',  'contact');
@@ -62,22 +62,23 @@ class SMMenu
         case \Config::get('scsys.MODULES.WMS'):
           \Menu::make('sMenu', function($menu) {
               $menu->add(' ');
-              $menu->add(trans('userinterface.HOME'), array('route' => 'wms.home'));
+              $menu->add(trans('userinterface.HOME'), ['route' => 'wms.home']);
               $menu->add(trans('wms.CONFIG'), 'what-we-do')->nickname(trans('wms.CONFIG'));
               $menu->get(trans('wms.CONFIG'))->add(trans('wms.CONFIG'), 'what-we-do');
               $menu->get(trans('wms.CONFIG'))->add(trans('wms.CONFIG'), 'what-we-do');
               $menu->add(trans('wms.CATALOGUES'), 'what-we-do')->nickname(trans('wms.CATALOGUES'));
-              $menu->get(trans('wms.CATALOGUES'))->add(trans('wms.WAREHOUSES'), array('route' => 'wms.whs.index'));
-              $menu->get(trans('wms.CATALOGUES'))->add(trans('wms.LOCATIONS'), array('route' => 'wms.locs.index'));
+              $menu->get(trans('wms.CATALOGUES'))->add(trans('wms.WAREHOUSES'), ['route' => 'wms.whs.index']);
+              $menu->get(trans('wms.CATALOGUES'))->add(trans('wms.LOCATIONS'), ['route' => 'wms.locs.index']);
               $menu->get(trans('wms.CATALOGUES'))->add(trans('wms.PALLETS'), 'what-we-do');
               $menu->get(trans('wms.CATALOGUES'))->add(trans('wms.LOTS'), 'what-we-do');
               $menu->get(trans('wms.CATALOGUES'))->add(trans('wms.BAR_CODES'), 'what-we-do');
               $menu->add(trans('wms.ITEMS'), 'what-we-do')->nickname(trans('wms.ITEMS'));
-              $menu->get(trans('wms.ITEMS'))->add(trans('wms.ITEMS'), 'what-we-do');
+              $menu->get(trans('wms.ITEMS'))->add(trans('wms.MATERIALS'), 'what-we-do');
+              $menu->get(trans('wms.ITEMS'))->add(trans('wms.PRODUCTS'), 'what-we-do');
               $menu->get(trans('wms.ITEMS'))->add(trans('wms.GENDERS'), 'what-we-do');
-              $menu->get(trans('wms.ITEMS'))->add(trans('wms.GROUPS'), 'what-we-do');
-              $menu->get(trans('wms.ITEMS'))->add(trans('wms.FAMILIES'), 'what-we-do');
-              $menu->get(trans('wms.ITEMS'))->add(trans('wms.UNITS'), array('route' => 'wms.units.index'));
+              $menu->get(trans('wms.ITEMS'))->add(trans('wms.GROUPS'), ['route' => 'wms.groups.index']);
+              $menu->get(trans('wms.ITEMS'))->add(trans('wms.FAMILIES'), ['route' => 'wms.families.index']);
+              $menu->get(trans('wms.ITEMS'))->add(trans('wms.UNITS'), ['route' => 'wms.units.index']);
               $menu->get(trans('wms.ITEMS'))->add(trans('wms.CONVERTIONS'), 'what-we-do');
               $menu->add(trans('wms.INVENTORY'), 'what-we-do');
               $menu->add(trans('wms.REPORTS'), 'what-we-do');
@@ -88,7 +89,7 @@ class SMMenu
         case \Config::get('scsys.MODULES.TMS'):
           \Menu::make('sMenu', function($menu) {
               $menu->add(' ');
-              $menu->add('Home', array('route' => 'tms.home'));
+              $menu->add('Home', ['route' => 'tms.home']);
               $menu->add('About',    'about');
               $menu->add('Services', 'services');
               $menu->add('Contact',  'contact');

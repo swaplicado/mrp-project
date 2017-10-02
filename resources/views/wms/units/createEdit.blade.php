@@ -6,7 +6,14 @@
 
 @if(isset($unit))
 	<?php
-			$sRoute = 'wms.units.update';
+			if (isset($bIsCopy))
+			{
+				$sRoute = 'wms.units.store';
+			}
+			else
+			{
+				$sRoute = 'wms.units.update';
+			}
 			$aux = $unit;
 	?>
 	@section('title', trans('userinterface.titles.EDIT_UNIT'))

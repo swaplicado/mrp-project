@@ -79,7 +79,7 @@ class SUserCompanyController extends Controller
 
         $userCompany->save();
 
-        Flash::success(trans('messages.REG_CREATED'));
+        Flash::success(trans('messages.REG_CREATED'))->important();
 
         return redirect()->route('userCompany.index');
     }
@@ -152,7 +152,7 @@ class SUserCompanyController extends Controller
 
       $userCompany->save();
 
-      Flash::success(trans('messages.REG_ACTIVATED'));
+      Flash::success(trans('messages.REG_ACTIVATED'))->important();
 
       return redirect()->route('userCompany.index');
     }
@@ -174,7 +174,7 @@ class SUserCompanyController extends Controller
 
             $userCompany->save();
             #$userCompany->delete();
-            Flash::error(trans('messages.REG_DELETED'));
+            Flash::error(trans('messages.REG_DELETED'))->important();
 
             return redirect()->route('userCompany.index');
         }

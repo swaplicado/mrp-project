@@ -9,22 +9,22 @@ use Laracasts\Flash\Flash;
 use App\SUtils\SUtil;
 use App\SUtils\SMenu;
 use App\SUtils\SValidation;
-use App\SWMS\SUnit;
+use App\SWMS\SItemFamily;
 
-class SUnitsController extends Controller
+class SFamiliesController extends Controller
 {
     private $oCurrentUserPermission;
     private $iFilter;
 
     public function __construct()
     {
-       $this->middleware('mdpermission:'.\Config::get('scperm.TP_PERMISSION.VIEW').','.\Config::get('scperm.VIEW_CODE.UNITS'));
+       $this->middleware('mdpermission:'.\Config::get('scperm.TP_PERMISSION.VIEW').','.\Config::get('scperm.VIEW_CODE.ITM_FAM'));
 
        $oMenu = new SMenu(\Config::get('scperm.MODULES.WMS'), 'navbar-green');
        session(['menu' => $oMenu]);
        $this->middleware('mdmenu:'.(session()->has('menu') ? session('menu')->getMenu() : \Config::get('scsys.UNDEFINED')));
 
-       $this->oCurrentUserPermission = SUtil::getTheUserPermission(!\Auth::check() ? \Config::get('scsys.UNDEFINED') : \Auth::user()->id, \Config::get('scperm.VIEW_CODE.UNITS'));
+       $this->oCurrentUserPermission = SUtil::getTheUserPermission(!\Auth::check() ? \Config::get('scsys.UNDEFINED') : \Auth::user()->id, \Config::get('scperm.VIEW_CODE.ITM_FAM'));
 
        $this->iFilter = \Config::get('scsys.FILTER.ACTIVES');
     }
@@ -39,13 +39,10 @@ class SUnitsController extends Controller
     {
       $this->iFilter = $request->filter == null ? \Config::get('scsys.FILTER.ACTIVES') : $request->filter;
 
-      $lUnits = SUnit::Search($request->name, $this->iFilter)->orderBy('name', 'ASC')->paginate(20);
-      $lUnits->each(function($lUnits) {
-        $lUnits->equivalence;
-      });
+      $lFamilies = SItemFamily::Search($request->name, $this->iFilter)->orderBy('name', 'ASC')->paginate(20);
 
-      return view('wms.units.index')
-          ->with('units', $lUnits)
+      return view('wms.families.index')
+          ->with('families', $lFamilies)
           ->with('actualUserPermission', $this->oCurrentUserPermission)
           ->with('iFilter', $this->iFilter);
     }
@@ -59,10 +56,7 @@ class SUnitsController extends Controller
     {
       if (SValidation::canCreate($this->oCurrentUserPermission->privilege_id))
         {
-          $unitsEq = SUnit::orderBy('name', 'ASC')->lists('name', 'id_unit');
-
-          return view('wms.units.createEdit')
-                            ->with('unitseq', $unitsEq);
+          return view('wms.families.createEdit');
         }
         else
         {
@@ -78,17 +72,17 @@ class SUnitsController extends Controller
      */
     public function store(Request $request)
     {
-      $unit = new SUnit($request->all());
+      $family = new SItemFamily($request->all());
 
-      $unit->is_deleted = \Config::get('scsys.STATUS.ACTIVE');
-      $unit->updated_by_id = \Auth::user()->id;
-      $unit->created_by_id = \Auth::user()->id;
+      $family->is_deleted = \Config::get('scsys.STATUS.ACTIVE');
+      $family->updated_by_id = \Auth::user()->id;
+      $family->created_by_id = \Auth::user()->id;
 
-      $unit->save();
+      $family->save();
 
       Flash::success(trans('messages.REG_CREATED'))->important();
 
-      return redirect()->route('wms.units.index');
+      return redirect()->route('wms.families.index');
     }
 
     /**
@@ -110,14 +104,11 @@ class SUnitsController extends Controller
      */
     public function edit($id)
     {
-        $unit = SUnit::find($id);
+        $family = SItemFamily::find($id);
 
-        if (SValidation::canEdit($this->oCurrentUserPermission->privilege_id) || SValidation::canAuthorEdit($this->oCurrentUserPermission->privilege_id, $unit->created_by_id))
+        if (SValidation::canEdit($this->oCurrentUserPermission->privilege_id) || SValidation::canAuthorEdit($this->oCurrentUserPermission->privilege_id, $family->created_by_id))
         {
-            $unitsEq = SUnit::orderBy('name', 'ASC')->lists('name', 'id_unit');
-
-            return view('wms.units.createEdit')->with('unit', $unit)
-                                            ->with('unitseq', $unitsEq);
+            return view('wms.families.createEdit')->with('family', $family);
         }
         else
         {
@@ -134,14 +125,14 @@ class SUnitsController extends Controller
      */
     public function update(Request $request, $id)
     {
-        $unit = SUnit::find($id);
-        $unit->fill($request->all());
-        $unit->updated_by_id = \Auth::user()->id;
-        $unit->save();
+        $family = SItemFamily::find($id);
+        $family->fill($request->all());
+        $family->updated_by_id = \Auth::user()->id;
+        $family->save();
 
         Flash::warning(trans('messages.REG_EDITED'))->important();
 
-        return redirect()->route('wms.units.index');
+        return redirect()->route('wms.families.index');
     }
 
     /**
@@ -152,30 +143,28 @@ class SUnitsController extends Controller
      */
     public function copy(Request $request, $id)
     {
-        $unit = SUnit::find($id);
+        $family = SItemFamily::find($id);
 
-        $unitCopy = clone $unit;
-        $unitCopy->id_bp = 0;
-        $unitsEq = SUnit::orderBy('name', 'ASC')->lists('name', 'id_unit');
+        $familyCopy = clone $family;
+        $familyCopy->id_family = 0;
 
-        return view('wms.units.createEdit')->with('unit', $unitCopy)
-                                        ->with('unitseq', $unitsEq)
-                                      ->with('bIsCopy', true);
+        return view('wms.families.createEdit')->with('family', $familyCopy)
+                                              ->with('bIsCopy', true);
     }
 
     public function activate(Request $request, $id)
     {
-        $unit = SUnit::find($id);
+        $family = SItemFamily::find($id);
 
-        $unit->fill($request->all());
-        $unit->is_deleted = \Config::get('scsys.STATUS.ACTIVE');
-        $unit->updated_by_id = \Auth::user()->id;
+        $family->fill($request->all());
+        $family->is_deleted = \Config::get('scsys.STATUS.ACTIVE');
+        $family->updated_by_id = \Auth::user()->id;
 
-        $unit->save();
+        $family->save();
 
         Flash::success(trans('messages.REG_ACTIVATED'))->important();
 
-        return redirect()->route('wms.units.index');
+        return redirect()->route('wms.families.index');
     }
 
     /**
@@ -188,16 +177,16 @@ class SUnitsController extends Controller
     {
         if (SValidation::canDestroy($this->oCurrentUserPermission->privilege_id))
         {
-          $unit = SUnit::find($id);
-          $unit->fill($request->all());
-          $unit->is_deleted = \Config::get('scsys.STATUS.DEL');
-          $unit->updated_by_id = \Auth::user()->id;
+          $family = SItemFamily::find($id);
+          $family->fill($request->all());
+          $family->is_deleted = \Config::get('scsys.STATUS.DEL');
+          $family->updated_by_id = \Auth::user()->id;
 
-          $unit->save();
+          $family->save();
           #$user->delete();
 
           Flash::error(trans('messages.REG_DELETED'))->important();
-          return redirect()->route('wms.units.index');
+          return redirect()->route('wms.families.index');
         }
         else
         {

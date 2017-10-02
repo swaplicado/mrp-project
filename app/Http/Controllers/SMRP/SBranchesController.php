@@ -89,7 +89,7 @@ class SBranchesController extends Controller {
 
         $branch->save();
 
-        Flash::success(trans('messages.REG_CREATED'));
+        Flash::success(trans('messages.REG_CREATED'))->important();
 
         return redirect()->route('mrp.branches.index');
     }
@@ -115,7 +115,7 @@ class SBranchesController extends Controller {
     {
         $branch = SBranch::find($id);
 
-        return view('mrp.branches.edit')->with('branch', $branch)
+        return view('mrp.branches.createEdit')->with('branch', $branch)
                                       ->with('iFilter', $this->iFilter);
     }
 
@@ -133,7 +133,7 @@ class SBranchesController extends Controller {
          $branch->updated_by_id = \Auth::user()->id;
          $branch->save();
 
-         Flash::warning(trans('messages.REG_EDITED'));
+         Flash::warning(trans('messages.REG_EDITED'))->important();
 
          return redirect()->route('mrp.branches.index');
      }
@@ -149,7 +149,7 @@ class SBranchesController extends Controller {
 
          $branch->save();
 
-         Flash::success(trans('messages.REG_ACTIVATED'));
+         Flash::success(trans('messages.REG_ACTIVATED'))->important();
 
          return redirect()->route('mrp.branches.index');
      }
@@ -170,7 +170,7 @@ class SBranchesController extends Controller {
          $branch->save();
          #$user->delete();
 
-         Flash::error(trans('messages.REG_DELETED'));
+         Flash::error(trans('messages.REG_DELETED'))->important();
 
          return redirect()->route('mrp.branches.index');
      }

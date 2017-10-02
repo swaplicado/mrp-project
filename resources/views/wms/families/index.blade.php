@@ -4,31 +4,25 @@
 	@include('front.templates.menumodules')
 @endsection
 
-@section('title', trans('userinterface.titles.LIST_WAREHOUSES'))
+@section('title', trans('userinterface.titles.LIST_FAMILIES'))
 
 @section('content')
-	<?php $sRoute="wms.whs"?>
+	<?php $sRoute="wms.families"?>
 	@section('create')
 		@include('front.templates.create')
 	@endsection
 	<table data-toggle="table" class="table table-condensed">
 		<thead>
-			<th>{{ trans('userinterface.labels.CODE') }}</th>
-			<th>{{ trans('userinterface.labels.WAREHOUSE') }}</th>
-			<th>{{ trans('userinterface.labels.TYPE') }}</th>
-			<th>{{ trans('userinterface.labels.BRANCH') }}</th>
+			<th>{{ trans('userinterface.labels.FAMILY') }}</th>
 			<th>{{ trans('userinterface.labels.STATUS') }}</th>
 			<th>{{ trans('userinterface.labels.ACTION') }}</th>
 		</thead>
 		<tbody>
-			@foreach($warehouses as $whs)
+			@foreach($families as $family)
 				<tr>
-					<td>{{ $whs->code }}</td>
-					<td>{{ $whs->name }}</td>
-					<td>{{ $whs->whs_type_id_opt != NULL ? $whs->whsType->name : '' }}</td>
-					<td>{{ $whs->branch->name }}</td>
+					<td>{{ $family->name }}</td>
 					<td>
-						@if (! $whs->is_deleted)
+						@if (! $family->is_deleted)
 								<span class="label label-success">{{ trans('userinterface.labels.ACTIVE') }}</span>
 						@else
 								<span class="label label-danger">{{ trans('userinterface.labels.INACTIVE') }}</span>
@@ -36,8 +30,8 @@
 					</td>
 					<td>
 						<?php
-								$oRegistry = $whs;
-								$iRegistryId = $whs->id_whs;
+								$oRegistry = $family;
+								$iRegistryId = $family->id_family;
 						?>
 						@include('front.listed.options')
 					</td>
@@ -45,5 +39,5 @@
 			@endforeach
 		</tbody>
 	</table>
-	{!! $warehouses->render() !!}
+	{!! $families->render() !!}
 @endsection

@@ -18,11 +18,13 @@ return [
           'CONFIG' => 'Configuración',
 
 
-      'ITEMS' => 'Ítems',
-          'GENDERS' => 'Ítems genéricos',
-          'GROUPS' => 'Grupos de ítems',
-          'FAMILIES' => 'Familias de ítems',
-          'CONVERTIONS' => 'Conversiones de ítems',
+      'ITEMS' => 'Materiales y Productos',
+          'GENDERS' => 'Géneros',
+          'GROUPS' => 'Grupos',
+          'FAMILIES' => 'Familias',
+          'CONVERTIONS' => 'Conversiones',
+          'MATERIALS' => 'Materiales',
+          'PRODUCTS' => 'Productos',
 
       'INVENTORY' => 'Inventarios',
           'LOT_STK' => 'Existencias por lote',

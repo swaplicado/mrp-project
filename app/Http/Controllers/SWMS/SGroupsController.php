@@ -5,26 +5,28 @@ use Illuminate\Http\Request;
 use App\Http\Requests;
 use App\Http\Controllers\Controller;
 
+use App\Http\Requests\SWMS\SGroupRequest;
 use Laracasts\Flash\Flash;
 use App\SUtils\SUtil;
 use App\SUtils\SMenu;
 use App\SUtils\SValidation;
-use App\SWMS\SUnit;
+use App\SWMS\SItemFamily;
+use App\SWMS\SItemGroup;
 
-class SUnitsController extends Controller
+class SGroupsController extends Controller
 {
     private $oCurrentUserPermission;
     private $iFilter;
 
     public function __construct()
     {
-       $this->middleware('mdpermission:'.\Config::get('scperm.TP_PERMISSION.VIEW').','.\Config::get('scperm.VIEW_CODE.UNITS'));
+       $this->middleware('mdpermission:'.\Config::get('scperm.TP_PERMISSION.VIEW').','.\Config::get('scperm.VIEW_CODE.ITM_GRP'));
 
        $oMenu = new SMenu(\Config::get('scperm.MODULES.WMS'), 'navbar-green');
        session(['menu' => $oMenu]);
        $this->middleware('mdmenu:'.(session()->has('menu') ? session('menu')->getMenu() : \Config::get('scsys.UNDEFINED')));
 
-       $this->oCurrentUserPermission = SUtil::getTheUserPermission(!\Auth::check() ? \Config::get('scsys.UNDEFINED') : \Auth::user()->id, \Config::get('scperm.VIEW_CODE.UNITS'));
+       $this->oCurrentUserPermission = SUtil::getTheUserPermission(!\Auth::check() ? \Config::get('scsys.UNDEFINED') : \Auth::user()->id, \Config::get('scperm.VIEW_CODE.ITM_GRP'));
 
        $this->iFilter = \Config::get('scsys.FILTER.ACTIVES');
     }
@@ -39,13 +41,13 @@ class SUnitsController extends Controller
     {
       $this->iFilter = $request->filter == null ? \Config::get('scsys.FILTER.ACTIVES') : $request->filter;
 
-      $lUnits = SUnit::Search($request->name, $this->iFilter)->orderBy('name', 'ASC')->paginate(20);
-      $lUnits->each(function($lUnits) {
-        $lUnits->equivalence;
+      $lGroups = SItemGroup::Search($request->name, $this->iFilter)->orderBy('name', 'ASC')->paginate(20);
+      $lGroups->each(function($lGroups) {
+        $lGroups->group;
       });
 
-      return view('wms.units.index')
-          ->with('units', $lUnits)
+      return view('wms.groups.index')
+          ->with('groups', $lGroups)
           ->with('actualUserPermission', $this->oCurrentUserPermission)
           ->with('iFilter', $this->iFilter);
     }
@@ -57,17 +59,17 @@ class SUnitsController extends Controller
      */
     public function create()
     {
-      if (SValidation::canCreate($this->oCurrentUserPermission->privilege_id))
-        {
-          $unitsEq = SUnit::orderBy('name', 'ASC')->lists('name', 'id_unit');
+        if (SValidation::canCreate($this->oCurrentUserPermission->privilege_id))
+          {
+            $lFamilies = SItemFamily::orderBy('name', 'ASC')->lists('name', 'id_family');
 
-          return view('wms.units.createEdit')
-                            ->with('unitseq', $unitsEq);
-        }
-        else
-        {
-           return redirect()->route('notauthorized');
-        }
+            return view('wms.groups.createEdit')
+                        ->with('families', $lFamilies);
+          }
+          else
+          {
+             return redirect()->route('notauthorized');
+          }
     }
 
     /**
@@ -76,19 +78,19 @@ class SUnitsController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(SGroupRequest $request)
     {
-      $unit = new SUnit($request->all());
+      $group = new SItemGroup($request->all());
 
-      $unit->is_deleted = \Config::get('scsys.STATUS.ACTIVE');
-      $unit->updated_by_id = \Auth::user()->id;
-      $unit->created_by_id = \Auth::user()->id;
+      $group->is_deleted = \Config::get('scsys.STATUS.ACTIVE');
+      $group->updated_by_id = \Auth::user()->id;
+      $group->created_by_id = \Auth::user()->id;
 
-      $unit->save();
+      $group->save();
 
       Flash::success(trans('messages.REG_CREATED'))->important();
 
-      return redirect()->route('wms.units.index');
+      return redirect()->route('wms.groups.index');
     }
 
     /**
@@ -110,14 +112,15 @@ class SUnitsController extends Controller
      */
     public function edit($id)
     {
-        $unit = SUnit::find($id);
+        $group = SItemGroup::find($id);
 
-        if (SValidation::canEdit($this->oCurrentUserPermission->privilege_id) || SValidation::canAuthorEdit($this->oCurrentUserPermission->privilege_id, $unit->created_by_id))
+        if (SValidation::canEdit($this->oCurrentUserPermission->privilege_id) || SValidation::canAuthorEdit($this->oCurrentUserPermission->privilege_id, $group->created_by_id))
         {
-            $unitsEq = SUnit::orderBy('name', 'ASC')->lists('name', 'id_unit');
+            $lFamilies = SItemFamily::orderBy('name', 'ASC')->lists('name', 'id_family');
 
-            return view('wms.units.createEdit')->with('unit', $unit)
-                                            ->with('unitseq', $unitsEq);
+            return view('wms.groups.createEdit')
+                                  ->with('families', $lFamilies)
+                                    ->with('group', $group);
         }
         else
         {
@@ -134,14 +137,14 @@ class SUnitsController extends Controller
      */
     public function update(Request $request, $id)
     {
-        $unit = SUnit::find($id);
-        $unit->fill($request->all());
-        $unit->updated_by_id = \Auth::user()->id;
-        $unit->save();
+        $group = SItemGroup::find($id);
+        $group->fill($request->all());
+        $group->updated_by_id = \Auth::user()->id;
+        $group->save();
 
         Flash::warning(trans('messages.REG_EDITED'))->important();
 
-        return redirect()->route('wms.units.index');
+        return redirect()->route('wms.groups.index');
     }
 
     /**
@@ -152,30 +155,28 @@ class SUnitsController extends Controller
      */
     public function copy(Request $request, $id)
     {
-        $unit = SUnit::find($id);
+        $group = SItemGroup::find($id);
 
-        $unitCopy = clone $unit;
-        $unitCopy->id_bp = 0;
-        $unitsEq = SUnit::orderBy('name', 'ASC')->lists('name', 'id_unit');
+        $groupCopy = clone $group;
+        $groupCopy->id_group = 0;
 
-        return view('wms.units.createEdit')->with('unit', $unitCopy)
-                                        ->with('unitseq', $unitsEq)
-                                      ->with('bIsCopy', true);
+        return view('wms.groups.createEdit')->with('group', $groupCopy)
+                                              ->with('bIsCopy', true);
     }
 
     public function activate(Request $request, $id)
     {
-        $unit = SUnit::find($id);
+        $group = SItemGroup::find($id);
 
-        $unit->fill($request->all());
-        $unit->is_deleted = \Config::get('scsys.STATUS.ACTIVE');
-        $unit->updated_by_id = \Auth::user()->id;
+        $group->fill($request->all());
+        $group->is_deleted = \Config::get('scsys.STATUS.ACTIVE');
+        $group->updated_by_id = \Auth::user()->id;
 
-        $unit->save();
+        $group->save();
 
         Flash::success(trans('messages.REG_ACTIVATED'))->important();
 
-        return redirect()->route('wms.units.index');
+        return redirect()->route('wms.groups.index');
     }
 
     /**
@@ -188,16 +189,16 @@ class SUnitsController extends Controller
     {
         if (SValidation::canDestroy($this->oCurrentUserPermission->privilege_id))
         {
-          $unit = SUnit::find($id);
-          $unit->fill($request->all());
-          $unit->is_deleted = \Config::get('scsys.STATUS.DEL');
-          $unit->updated_by_id = \Auth::user()->id;
+          $group = SItemGroup::find($id);
+          $group->fill($request->all());
+          $group->is_deleted = \Config::get('scsys.STATUS.DEL');
+          $group->updated_by_id = \Auth::user()->id;
 
-          $unit->save();
+          $group->save();
           #$user->delete();
 
           Flash::error(trans('messages.REG_DELETED'))->important();
-          return redirect()->route('wms.units.index');
+          return redirect()->route('wms.groups.index');
         }
         else
         {
