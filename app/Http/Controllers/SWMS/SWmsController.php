@@ -97,6 +97,7 @@ class SWmsController extends Controller
     {
 
     }
+    
 
     public function activate(Request $request, $id)
     {
