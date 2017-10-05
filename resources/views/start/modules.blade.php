@@ -1,4 +1,4 @@
-@extends('front.mainHome')
+@extends('templates.home.mainHome')
 <br />
 <br />
 @section('title', trans('userinterface.titles.SELECT_MODULE'))

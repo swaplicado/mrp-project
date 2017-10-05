@@ -16,8 +16,8 @@
       $lDataBases = array();
 
       $i = 0;
-      $lDataBases[$i++] = 'mrp_cartro';
-      $lDataBases[$i++] = 'mrp_aeth';
+      $lDataBases[$i++] = 'siie_cartro';
+      $lDataBases[$i++] = 'siie_aeth';
 
       return $lDataBases;
     }

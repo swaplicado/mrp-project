@@ -1,13 +1,13 @@
-<?php namespace App\Http\Controllers\SSys;
+<?php namespace App\Http\Controllers\SSYS;
 
 use Illuminate\Http\Request;
 
 use App\Http\Requests;
 use App\Http\Controllers\Controller;
 
-use App\SSys\SUserCompany;
-use App\SSys\SUser;
-use App\SSys\SCompany;
+use App\SSYS\SUserCompany;
+use App\SSYS\SUser;
+use App\SSYS\SCompany;
 
 class SUserCompanyController extends Controller
 {

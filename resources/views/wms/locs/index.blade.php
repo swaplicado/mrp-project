@@ -1,7 +1,7 @@
-@extends('front.mainListado')
+@extends('templates.list.mainlist')
 
 @section('menu')
-	@include('front.templates.menumodules')
+	@include('templates.menu.menumodules')
 @endsection
 
 @section('title', trans('userinterface.titles.LIST_LOCATIONS'))
@@ -9,7 +9,7 @@
 @section('content')
 	<?php $sRoute="wms.locs"?>
 	@section('create')
-		@include('front.templates.create')
+		@include('templates.form.create')
 	@endsection
 	<table data-toggle="table" class="table table-condensed">
 		<thead>
@@ -37,7 +37,7 @@
 								$oRegistry = $location;
 								$iRegistryId = $location->id_location;
 						?>
-						@include('front.listed.options')
+						@include('templates.list.options')
 					</td>
 				</tr>
 			@endforeach

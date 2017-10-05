@@ -4,7 +4,7 @@ use Illuminate\Database\Eloquent\Model;
 
 class SUnit extends Model {
 
-  protected $connection = 'mrp';
+  protected $connection = 'siie';
   protected $primaryKey = 'id_unit';
   protected $table = "wms_units";
 

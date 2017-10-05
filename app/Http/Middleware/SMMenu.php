@@ -12,7 +12,7 @@ class SMMenu
      * @param  \Illuminate\Http\Request  $request
      * @param  \Closure  $next
      * @param  int $iModule can be:
-     *          \Config::get('scsys.MODULES.MRP')
+     *          \Config::get('scsys.MODULES.SIIE')
      *          \Config::get('scsys.MODULES.MMS')
      *          \Config::get('scsys.MODULES.QMS')
      *          \Config::get('scsys.MODULES.WMS')
@@ -22,16 +22,16 @@ class SMMenu
     public function handle($request, Closure $next, $iModule)
     {
       switch ($iModule) {
-        case \Config::get('scsys.MODULES.MRP'):
+        case \Config::get('scsys.MODULES.SIIE'):
           \Menu::make('sMenu', function($menu) {
               $menu->add('Home', ['route' => 'mms.home']);
-              $menu->add(trans('mrp.MRP'), '')->nickname(trans('mrp.MRP'));
-              $menu->get(trans('mrp.MRP'))->add(trans('mrp.MRP_COMPANIES'), ['route' => 'mrp.companies.index']);
-              $menu->get(trans('mrp.MRP'))->add(trans('mrp.BRANCHES'), ['route' => 'mrp.branches.index']);
-              $menu->get(trans('mrp.MRP'))->add(trans('mrp.ACG_YEAR_PER'), ['route' => 'mrp.years.index']);
-              $menu->get(trans('mrp.MRP'))->add(trans('mrp.BPS'), ['route' => 'mrp.bps.index']);
-              $menu->add(trans('mrp.CATALOGUES'), '')->nickname(trans('mrp.CATALOGUES'));
-              $menu->get(trans('mrp.CATALOGUES'))->add(trans('wms.UNITS'), ['route' => 'wms.units.index']);
+              $menu->add(trans('siie.SIIE'), '')->nickname(trans('siie.SIIE'));
+              $menu->get(trans('siie.SIIE'))->add(trans('siie.SIIE_COMPANIES'), ['route' => 'siie.companies.index']);
+              $menu->get(trans('siie.SIIE'))->add(trans('siie.BRANCHES'), ['route' => 'siie.branches.index']);
+              $menu->get(trans('siie.SIIE'))->add(trans('siie.ACG_YEAR_PER'), ['route' => 'siie.years.index']);
+              $menu->get(trans('siie.SIIE'))->add(trans('siie.BPS'), ['route' => 'siie.bps.index']);
+              $menu->add(trans('siie.CATALOGUES'), '')->nickname(trans('siie.CATALOGUES'));
+              $menu->get(trans('siie.CATALOGUES'))->add(trans('wms.UNITS'), ['route' => 'wms.units.index']);
           });
 
           break;

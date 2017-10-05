@@ -1,7 +1,7 @@
-@extends('front.mainListado')
+@extends('templates.list.mainlist')
 
 @section('menu')
-	@include('front.templates.menumodules')
+	@include('templates.menu.menumodules')
 @endsection
 
 @section('title', trans('userinterface.titles.LIST_GROUPS'))
@@ -9,7 +9,7 @@
 @section('content')
 	<?php $sRoute="wms.groups"?>
 	@section('create')
-		@include('front.templates.create')
+		@include('templates.form.create')
 	@endsection
 	<table data-toggle="table" class="table table-condensed">
 		<thead>
@@ -35,7 +35,7 @@
 								$oRegistry = $group;
 								$iRegistryId = $group->id_group;
 						?>
-						@include('front.listed.options')
+						@include('templates.list.options')
 					</td>
 				</tr>
 			@endforeach

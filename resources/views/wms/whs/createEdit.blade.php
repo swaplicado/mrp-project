@@ -1,7 +1,7 @@
-@extends('front.mainCapturaEdicion')
+@extends('templates.newedit.mainnewedit')
 
 @section('menu')
-	@include('front.templates.menumodules')
+	@include('templates.menu.menumodules')
 @endsection
 
 @if(isset($whs))

@@ -4,7 +4,7 @@ use Illuminate\Database\Eloquent\Model;
 
 class SItemClass extends Model {
 
-  protected $connection = 'mrp';
+  protected $connection = 'siie';
   protected $primaryKey = 'id_class';
   protected $table = "wmss_item_classes";
 

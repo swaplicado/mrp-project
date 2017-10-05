@@ -1,4 +1,4 @@
-<?php namespace App\SSys;
+<?php namespace App\SSYS;
 
 use Illuminate\Database\Eloquent\Model;
 
@@ -11,11 +11,11 @@ class SCompanyModule extends Model
 
   public function company()
   {
-      return $this->belongsTo('App\SSys\SCompany');
+      return $this->belongsTo('App\SSYS\SCompany');
   }
 
   public function module()
   {
-      return $this->belongsTo('App\SSys\SModule');
+      return $this->belongsTo('App\SSYS\SModule');
   }
 }

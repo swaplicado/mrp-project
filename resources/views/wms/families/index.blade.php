@@ -1,7 +1,7 @@
-@extends('front.mainListado')
+@extends('templates.list.mainlist')
 
 @section('menu')
-	@include('front.templates.menumodules')
+	@include('templates.menu.menumodules')
 @endsection
 
 @section('title', trans('userinterface.titles.LIST_FAMILIES'))
@@ -9,7 +9,7 @@
 @section('content')
 	<?php $sRoute="wms.families"?>
 	@section('create')
-		@include('front.templates.create')
+		@include('templates.form.create')
 	@endsection
 	<table data-toggle="table" class="table table-condensed">
 		<thead>
@@ -33,7 +33,7 @@
 								$oRegistry = $family;
 								$iRegistryId = $family->id_family;
 						?>
-						@include('front.listed.options')
+						@include('templates.list.options')
 					</td>
 				</tr>
 			@endforeach

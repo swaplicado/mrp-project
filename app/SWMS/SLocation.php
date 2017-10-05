@@ -4,7 +4,7 @@ use Illuminate\Database\Eloquent\Model;
 
 class SLocation extends Model {
 
-  protected $connection = 'mrp';
+  protected $connection = 'siie';
   protected $primaryKey = 'id_location';
   protected $table = 'wms_warehouse_locations';
 

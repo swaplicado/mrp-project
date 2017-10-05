@@ -4,7 +4,7 @@ use Illuminate\Database\Eloquent\Model;
 
 class SItemGender extends Model {
 
-  protected $connection = 'mrp';
+  protected $connection = 'siie';
   protected $primaryKey = 'id_gender';
   protected $table = "wms_item_genders";
 

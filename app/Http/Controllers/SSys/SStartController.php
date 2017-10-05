@@ -1,4 +1,4 @@
-<?php namespace App\Http\Controllers\SSys;
+<?php namespace App\Http\Controllers\SSYS;
 
 use Illuminate\Http\Request;
 
@@ -6,8 +6,8 @@ use App\Http\Requests;
 use App\Http\Controllers\Controller;
 use App\SUtils\SValidation;
 use App\SUtils\SUtil;
-use App\SSys\SCompany;
-use App\SSys\SUserCompany;
+use App\SSYS\SCompany;
+use App\SSYS\SUserCompany;
 
 class SStartController extends Controller
 {
@@ -40,7 +40,7 @@ class SStartController extends Controller
 
         session(['company' => $oCompany]);
 
-        $sConnection = 'mrp';
+        $sConnection = 'siie';
         $bDefault = true;
         $sHost = $oCompany->host;
         $sDataBase = $oCompany->database_name;

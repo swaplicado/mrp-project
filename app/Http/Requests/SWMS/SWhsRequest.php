@@ -3,7 +3,7 @@
 use App\Http\Requests\Request;
 use App\SWMS\SWarehouse;
 use App\SWMS\SWhsType;
-use App\SMRP\SBranch;
+use App\SSIIE\SBranch;
 
 class SWhsRequest extends Request
 {
@@ -29,10 +29,10 @@ class SWhsRequest extends Request
       $whstype = new SWhsType();
 
         return [
-            'code' => 'required|unique:mrp.'.$whs->getTable(),
+            'code' => 'required|unique:siie.'.$whs->getTable(),
             'name' => 'required',
-            'branch_id' => 'required|exists:mrp.'.$branch->getTable().',id_branch',
-            'whs_type_id_opt' => 'exists:mrp.'.$whstype->getTable().',id_type',
+            'branch_id' => 'required|exists:siie.'.$branch->getTable().',id_branch',
+            'whs_type_id_opt' => 'exists:siie.'.$whstype->getTable().',id_type',
         ];
     }
 }

@@ -28,14 +28,14 @@ Route::group(['middleware' => ['auth']], function() {
 
 //****************************************/ Start/*************************
 
-	Route::resource('start','SSys\SStartController');
+	Route::resource('start','SSYS\SStartController');
 	Route::get('/start',[
 		'as' => 'start',
-		'uses' => 'SSys\SStartController@index'
+		'uses' => 'SSYS\SStartController@index'
 	]);
 	Route::post('/start/in',[
 		'as' => 'start.getIn',
-		'uses' => 'SSys\SStartController@GetIn'
+		'uses' => 'SSYS\SStartController@GetIn'
 	]);
 
 //****************************************/ Admin/*************************
@@ -46,69 +46,61 @@ Route::group(['middleware' => ['auth']], function() {
 			'uses' => 'SPlantillaController@index'
 		]);
 
-		Route::get('/captura',[
-			'as' => 'Plantilla.captura',
-			'uses' => 'SPlantillaController@captura'
-		]);
+  Route::group(['prefix' => 'admin'], function () {
+  		Route::resource('users','SUsersController');
+  		Route::get('users/{id}/activate', [
+  			'uses' => 'SUsersController@Activate',
+  			'as' => 'admin.users.activate'
+  		]);
+  		Route::get('users/{id}/copy', [
+  			'uses' => 'SUsersController@Copy',
+  			'as' => 'admin.users.copy'
+  		]);
+  		Route::get('users/{id}/destroy',[
+  			'uses' => 'SUsersController@Destroy',
+  			'as' => 'admin.users.destroy'
+  		]);
 
-		Route::get('/listado',[
-			'as' => 'Plantilla.listado',
-			'uses' => 'SPlantillaController@listado'
-		]);
+  		Route::resource('privileges','SSYS\SPrivilegesController');
+  		Route::get('privileges/{id}/activate', [
+  			'uses' => 'SSYS\SPrivilegesController@Activate',
+  			'as' => 'admin.privileges.activate'
+  		]);
+  		Route::get('privileges/{id}/destroy',[
+  			'uses' => 'SSYS\SPrivilegesController@Destroy',
+  			'as' => 'admin.privileges.destroy'
+  		]);
 
-		Route::resource('users','SUsersController');
-		Route::get('users/{id}/activate', [
-			'uses' => 'SUsersController@Activate',
-			'as' => 'users.activate'
-		]);
-		Route::get('users/{id}/copy', [
-			'uses' => 'SUsersController@Copy',
-			'as' => 'users.copy'
-		]);
-		Route::get('users/{id}/destroy',[
-			'uses' => 'SUsersController@Destroy',
-			'as' => 'users.destroy'
-		]);
+  		Route::resource('permissions','SSYS\SPermissionsController');
+  		Route::get('permissions/{id}/activate', [
+  			'uses' => 'SSYS\SPermissionsController@Activate',
+  			'as' => 'admin.permissions.activate'
+  		]);
+  		Route::get('permissions/{id}/destroy',[
+  			'uses' => 'SSYS\SPermissionsController@Destroy',
+  			'as' => 'admin.permissions.destroy'
+  		]);
 
-		Route::resource('privileges','SSys\SPrivilegesController');
-		Route::get('privileges/{id}/activate', [
-			'uses' => 'SSys\SPrivilegesController@Activate',
-			'as' => 'privileges.activate'
-		]);
-		Route::get('privileges/{id}/destroy',[
-			'uses' => 'SSys\SPrivilegesController@Destroy',
-			'as' => 'privileges.destroy'
-		]);
+  		Route::resource('userPermissions','SSYS\SUserPermissionsController');
+  		Route::get('userPermissions/{id}/activate', [
+  			'uses' => 'SSYS\SUserPermissionsController@Activate',
+  			'as' => 'admin.userPermissions.activate'
+  		]);
+  		Route::get('userPermissions/{id}/destroy',[
+  			'uses' => 'SSYS\SUserPermissionsController@Destroy',
+  			'as' => 'admin.userPermissions.destroy'
+  		]);
 
-		Route::resource('permissions','SSys\SPermissionsController');
-		Route::get('permissions/{id}/activate', [
-			'uses' => 'SSys\SPermissionsController@Activate',
-			'as' => 'permissions.activate'
-		]);
-		Route::get('permissions/{id}/destroy',[
-			'uses' => 'SSys\SPermissionsController@Destroy',
-			'as' => 'permissions.destroy'
-		]);
-
-		Route::resource('userPermissions','SSys\SUserPermissionsController');
-		Route::get('userPermissions/{id}/activate', [
-			'uses' => 'SSys\SUserPermissionsController@Activate',
-			'as' => 'userPermissions.activate'
-		]);
-		Route::get('userPermissions/{id}/destroy',[
-			'uses' => 'SSys\SUserPermissionsController@Destroy',
-			'as' => 'userPermissions.destroy'
-		]);
-
-    Route::resource('companies','SSys\SCompaniesController');
-    Route::get('companies/{id}/destroy',[
-			'uses' => 'SSys\SCompaniesController@Destroy',
-			'as' => 'companies.destroy'
-		]);
-    Route::get('companies/{id}/activate', [
-			'uses' => 'SSys\SCompaniesController@Activate',
-			'as' => 'companies.activate'
-		]);
+      Route::resource('companies','SSYS\SCompaniesController');
+      Route::get('companies/{id}/destroy',[
+  			'uses' => 'SSYS\SCompaniesController@Destroy',
+  			'as' => 'admin.companies.destroy'
+  		]);
+      Route::get('companies/{id}/activate', [
+  			'uses' => 'SSYS\SCompaniesController@Activate',
+  			'as' => 'admin.companies.activate'
+  		]);
+    });
 
 	});
 
@@ -118,7 +110,7 @@ Route::group(['middleware' => ['auth']], function() {
 
 		Route::get('/modules',[
 			'as' => 'start.selmod',
-			'uses' => 'SSys\SStartController@SelectModule'
+			'uses' => 'SSYS\SStartController@SelectModule'
 		]);
 
 //****************************************/ Manufacturing /*************************
@@ -239,74 +231,74 @@ Route::group(['middleware' => ['auth']], function() {
 		]);
 		Route::resource('tms','STMS\SShipmentsController');
 
-//****************************************/ Mrp /*************************
-    Route::group(['prefix' => 'mrp'], function () {
+//****************************************/ Siie /*************************
+    Route::group(['prefix' => 'siie'], function () {
 
       Route::get('/home',[
-  			'as' => 'mrp.home',
-  			'uses' => 'SMRP\SMRPController@Home'
+  			'as' => 'siie.home',
+  			'uses' => 'SSIIE\SSIIEController@Home'
   		]);
-      Route::resource('central','SMRP\SMRPController');
+      Route::resource('central','SSIIE\SSiieController');
 
-      Route::resource('companies','SMRP\SMrpCompaniesController');
+      Route::resource('companies','SSIIE\SSiieCompaniesController');
       Route::get('companies/{id}/destroy',[
-        'uses' => 'SMRP\SMrpCompaniesController@Destroy',
-        'as' => 'mrp.companies.destroy'
+        'uses' => 'SSIIE\SSiieCompaniesController@Destroy',
+        'as' => 'siie.companies.destroy'
       ]);
       Route::get('companies/{id}/activate', [
-        'uses' => 'SMRP\SMrpCompaniesController@Activate',
-        'as' => 'mrp.companies.activate'
+        'uses' => 'SSIIE\SSiieCompaniesController@Activate',
+        'as' => 'siie.companies.activate'
       ]);
 
-      Route::resource('branches','SMRP\SBranchesController');
+      Route::resource('branches','SSIIE\SBranchesController');
       Route::get('branches/{id}/destroy',[
-        'uses' => 'SMRP\SBranchesController@Destroy',
-        'as' => 'mrp.branches.destroy'
+        'uses' => 'SSIIE\SBranchesController@Destroy',
+        'as' => 'siie.branches.destroy'
       ]);
       Route::get('branches/{id}/activate', [
-        'uses' => 'SMRP\SBranchesController@Activate',
-        'as' => 'mrp.branches.activate'
+        'uses' => 'SSIIE\SBranchesController@Activate',
+        'as' => 'siie.branches.activate'
       ]);
 
-      Route::resource('years','SMRP\SYearsController');
+      Route::resource('years','SSIIE\SYearsController');
       Route::get('years/{id}/destroy',[
-        'uses' => 'SMRP\SYearsController@Destroy',
-        'as' => 'mrp.years.destroy'
+        'uses' => 'SSIIE\SYearsController@Destroy',
+        'as' => 'siie.years.destroy'
       ]);
       Route::get('years/{id}/activate', [
-        'uses' => 'SMRP\SYearsController@Activate',
-        'as' => 'mrp.years.activate'
+        'uses' => 'SSIIE\SYearsController@Activate',
+        'as' => 'siie.years.activate'
       ]);
 
       Route::get('months/{year}/edit/{month}',[
-        'uses' => 'SMRP\SMonthsController@edit',
-        'as' => 'mrp.months.edit'
+        'uses' => 'SSIIE\SMonthsController@edit',
+        'as' => 'siie.months.edit'
       ]);
       Route::get('months/{year}/update/{month}',[
-        'uses' => 'SMRP\SMonthsController@edit',
-        'as' => 'mrp.months.update'
+        'uses' => 'SSIIE\SMonthsController@edit',
+        'as' => 'siie.months.update'
       ]);
       Route::get('months/{year}/index',[
-        'uses' => 'SMRP\SMonthsController@index',
-        'as' => 'mrp.months.index'
+        'uses' => 'SSIIE\SMonthsController@index',
+        'as' => 'siie.months.index'
       ]);
       Route::put('months/{year}/update',[
-        'uses' => 'SMRP\SMonthsController@Update',
-        'as' => 'mrp.months.update'
+        'uses' => 'SSIIE\SMonthsController@Update',
+        'as' => 'siie.months.update'
       ]);
 
-      Route::resource('bps','SMRP\SBussPartnersController');
+      Route::resource('bps','SSIIE\SBussPartnersController');
       Route::get('bps/{id}/destroy',[
-        'uses' => 'SMRP\SBussPartnersController@Destroy',
-        'as' => 'mrp.bps.destroy'
+        'uses' => 'SSIIE\SBussPartnersController@Destroy',
+        'as' => 'siie.bps.destroy'
       ]);
       Route::get('bps/{id}/activate', [
-        'uses' => 'SMRP\SBussPartnersController@Activate',
-        'as' => 'mrp.bps.activate'
+        'uses' => 'SSIIE\SBussPartnersController@Activate',
+        'as' => 'siie.bps.activate'
       ]);
       Route::get('bps/{id}/copy', [
-  			'uses' => 'SMRP\SBussPartnersController@Copy',
-  			'as' => 'mrp.bps.copy'
+  			'uses' => 'SSIIE\SBussPartnersController@Copy',
+  			'as' => 'siie.bps.copy'
   		]);
 
     });

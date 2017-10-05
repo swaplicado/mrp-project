@@ -1,4 +1,4 @@
-<?php namespace App\SSys;
+<?php namespace App\SSYS;
 
 use Illuminate\Database\Eloquent\Model;
 
@@ -11,11 +11,11 @@ class SModule extends Model
 
   public function companyModule()
   {
-      return $this->hasMany('App\SSys\SCompanyModule');
+      return $this->hasMany('App\SSYS\SCompanyModule');
   }
 
   public function permission()
   {
-      return $this->hasMany('App\SSys\SPermission');
+      return $this->hasMany('App\SSYS\SPermission');
   }
 }

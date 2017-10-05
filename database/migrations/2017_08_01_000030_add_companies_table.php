@@ -31,8 +31,8 @@ class AddCompaniesTable extends Migration
       });
 
       DB::table('sys_companies')->insert([
-      	['id_company' => '1','name' => 'Cartro','database_name' => 'mrp_cartro','host' => 'localhost','port' => '3306','database_user' => 'root','password' => 'msroot','default_schema' => '', 'is_deleted' => '0', 'created_by_id' => '1', 'updated_by_id' => '1'],
-      	['id_company' => '2','name' => 'AETH','database_name' => 'mrp_aeth','host' => 'localhost','port' => '3306','database_user' => 'root','password' => 'msroot','default_schema' => '', 'is_deleted' => '0', 'created_by_id' => '1', 'updated_by_id' => '1'],
+      	['id_company' => '1','name' => 'Cartro','database_name' => 'siie_cartro','host' => 'localhost','port' => '3306','database_user' => 'root','password' => 'msroot','default_schema' => '', 'is_deleted' => '0', 'created_by_id' => '1', 'updated_by_id' => '1'],
+      	['id_company' => '2','name' => 'AETH','database_name' => 'siie_aeth','host' => 'localhost','port' => '3306','database_user' => 'root','password' => 'msroot','default_schema' => '', 'is_deleted' => '0', 'created_by_id' => '1', 'updated_by_id' => '1'],
       ]);
     }
 

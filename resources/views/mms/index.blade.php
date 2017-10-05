@@ -1,11 +1,11 @@
-@extends('front.modules')
+@extends('templates.home.modules')
 
 @section('title', trans('mms.MODULE'))
 
 @section('content')
 
   <div class="row">
-    @include('front.templates.rapidaccess')
+    @include('templates.home.rapidaccess')
     <?php echo createBlock(asset('images/wms/box.gif'), "#", trans('wms.QRY_INVENTORY'), "primary3", trans('wms.QRY_INVENTORY_T'));?>
     <?php echo createBlock(asset('images/mms/ingred_list.gif'), "#", trans('mms.FORMULAS'), "primary3", trans('mms.FORMULAS_T'));?>
   </div>

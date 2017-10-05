@@ -1,13 +1,13 @@
-<?php namespace App\Http\Controllers\SSys;
+<?php namespace App\Http\Controllers\SSYS;
 
 use Illuminate\Http\Request;
-use App\SSys\SUserPermission;
+use App\SSYS\SUserPermission;
 use Laracasts\Flash\Flash;
 use App\Http\Requests;
 use App\Http\Controllers\Controller;
 use App\User;
-use App\SSys\SPermission;
-use App\SSys\SPrivilege;
+use App\SSYS\SPermission;
+use App\SSYS\SPrivilege;
 use App\SUtils\SValidation;
 use App\SUtils\SUtil;
 
@@ -42,7 +42,7 @@ class SUserPermissionsController extends Controller
           $userPermissions->privilege;
         });
 
-        return view('userPermissions.index')
+        return view('admin.userPermissions.index')
                             ->with('userPermissions', $userPermissions)
                             ->with('actualUserPermission', $this->oCurrentUserPermission)
                             ->with('iFilter', $this->iFilter);
@@ -61,7 +61,7 @@ class SUserPermissionsController extends Controller
           $permissions = SPermission::orderBy('name', 'ASC')->lists('name', 'id_permission');
           $privileges = SPrivilege::orderBy('name', 'ASC')->lists('name', 'id_privilege');
 
-          return view('userPermissions.createEdit')
+          return view('admin.userPermissions.createEdit')
                       ->with('users', $users)
                       ->with('permissions', $permissions)
                       ->with('privileges', $privileges);
@@ -86,7 +86,7 @@ class SUserPermissionsController extends Controller
 
         Flash::success(trans('messages.REG_CREATED'))->important();
 
-        return redirect()->route('userPermissions.index');
+        return redirect()->route('admin.userPermissions.index');
     }
 
     /**
@@ -120,7 +120,7 @@ class SUserPermissionsController extends Controller
           $permissions = SPermission::orderBy('name', 'ASC')->lists('name', 'id_permission');
           $privileges = SPrivilege::orderBy('name', 'ASC')->lists('name', 'id_privilege');
 
-          return view('userPermissions.createEdit')
+          return view('admin.userPermissions.createEdit')
             ->with('userPermission', $userPermission)
             ->with('users', $users)
             ->with('permissions', $permissions)
@@ -147,7 +147,7 @@ class SUserPermissionsController extends Controller
 
       Flash::success(trans('messages.REG_EDITED'));
 
-      return redirect()->route('userPermissions.index');
+      return redirect()->route('admin.userPermissions.index');
     }
 
     public function activate(Request $request, $id)
@@ -161,7 +161,7 @@ class SUserPermissionsController extends Controller
 
       Flash::success(trans('messages.REG_ACTIVATED'))->important();
 
-      return redirect()->route('userPermissions.index');
+      return redirect()->route('admin.userPermissions.index');
     }
 
     /**
@@ -183,7 +183,7 @@ class SUserPermissionsController extends Controller
             #$userPermission->delete();
             Flash::error(trans('messages.REG_DELETED'))->important();
 
-            return redirect()->route('userPermissions.index');
+            return redirect()->route('admin.userPermissions.index');
         }
         else
         {

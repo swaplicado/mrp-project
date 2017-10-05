@@ -1,4 +1,4 @@
-<?php namespace App\SSys;
+<?php namespace App\SSYS;
 
 use Illuminate\Database\Eloquent\Model;
 
@@ -11,17 +11,17 @@ class SCompany extends Model {
 
     public function userCompany()
     {
-    	return $this->hasMany('App\SSys\SUserCompany');
+    	return $this->hasMany('App\SSYS\SUserCompany');
     }
 
     public function coUsPermission()
     {
-      return $this->hasMany('App\SSys\SCoUsPermission');
+      return $this->hasMany('App\SSYS\SCoUsPermission');
     }
 
     public function company()
     {
-      return $this->hasOne('App\SMRP\SMrpCompany');
+      return $this->hasOne('App\SSIIE\SSiieCompany');
     }
 
     public function userCreation()

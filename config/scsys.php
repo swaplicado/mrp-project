@@ -6,7 +6,7 @@ return [
   'UNDEFINED' => '0',
 
   'MODULES'   =>  [
-                  'MRP' => '5',
+                  'SIIE' => '5',
                   'MMS' => '1',
                   'QMS' => '2',
                   'WMS' => '3',

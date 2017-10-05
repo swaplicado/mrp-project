@@ -1,7 +1,7 @@
-@extends('front.mainListado')
+@extends('templates.list.mainlist')
 
 @section('menu')
-	@include('front.templates.menumodules')
+	@include('templates.menu.menumodules')
 @endsection
 
 @section('title', trans('userinterface.titles.LIST_UNITS'))
@@ -9,7 +9,7 @@
 @section('content')
 	<?php $sRoute="wms.units"?>
 	@section('create')
-		@include('front.templates.create')
+		@include('templates.form.create')
 	@endsection
 	<table data-toggle="table" class="table table-condensed">
 		<thead>
@@ -35,7 +35,7 @@
 								$oRegistry = $unit;
 								$iRegistryId = $unit->id_unit;
 						?>
-						@include('front.listed.options')
+						@include('templates.list.options')
 					</td>
 				</tr>
 			@endforeach

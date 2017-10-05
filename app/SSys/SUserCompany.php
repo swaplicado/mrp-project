@@ -1,4 +1,4 @@
-<?php namespace App\SSys;
+<?php namespace App\SSYS;
 
 use Illuminate\Database\Eloquent\Model;
 
@@ -16,7 +16,7 @@ class SUserCompany extends Model
 
   public function company()
   {
-      return $this->belongsTo('App\SSys\SCompany', 'company_id');
+      return $this->belongsTo('App\SSYS\SCompany', 'company_id');
   }
 
   public function scopeSearch($query, $iFilter)

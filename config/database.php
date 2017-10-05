@@ -76,12 +76,12 @@ return [
             'strict'    => false,
         ],
 
-        'mrp' => [
+        'siie' => [
             'driver'    => 'mysql',
-            'host'      => env('DB_HOST_MRP', 'localhost'),
-            'database'  => env('DB_DATABASE_MRP', 'forge'),
-            'username'  => env('DB_USERNAME_MRP', 'forge'),
-            'password'  => env('DB_PASSWORD_MRP', ''),
+            'host'      => env('DB_HOST_SIIE', 'localhost'),
+            'database'  => env('DB_DATABASE_SIIE', 'forge'),
+            'username'  => env('DB_USERNAME_SIIE', 'forge'),
+            'password'  => env('DB_PASSWORD_SIIE', ''),
             'charset'   => 'utf8',
             'collation' => 'utf8_unicode_ci',
             'prefix'    => '',

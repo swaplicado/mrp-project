@@ -1,4 +1,4 @@
-<?php namespace App\SSys;
+<?php namespace App\SSYS;
 
 use Illuminate\Database\Eloquent\Model;
 
@@ -11,7 +11,7 @@ class SPrivilege extends Model
 
   public function userPermission()
   {
-      return $this->hasMany('App\SSys\SUserPermission');
+      return $this->hasMany('App\SSYS\SUserPermission');
   }
 
   public function scopeSearch($query, $name, $iFilter)

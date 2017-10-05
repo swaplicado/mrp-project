@@ -4,7 +4,7 @@ use Illuminate\Database\Eloquent\Model;
 
 class SWarehouse extends Model {
 
-  protected $connection = 'mrp';
+  protected $connection = 'siie';
   protected $primaryKey = 'id_whs';
   protected $table = "wms_warehouses";
 
@@ -28,7 +28,7 @@ class SWarehouse extends Model {
 
   public function branch()
   {
-    return $this->belongsTo('App\SMRP\SBranch', 'branch_id');
+    return $this->belongsTo('App\SSIIE\SBranch', 'branch_id');
   }
 
   public function userCreation()

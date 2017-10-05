@@ -4,7 +4,7 @@ use Illuminate\Database\Eloquent\Model;
 
 class SItem extends Model {
 
-  protected $connection = 'mrp';
+  protected $connection = 'siie';
   protected $primaryKey = 'id_item';
   protected $table = "wms_item_families";
 

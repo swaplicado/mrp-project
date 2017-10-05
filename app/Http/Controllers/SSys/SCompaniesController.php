@@ -1,10 +1,10 @@
-<?php namespace App\Http\Controllers\SSys;
+<?php namespace App\Http\Controllers\SSYS;
 
 use Illuminate\Http\Request;
 
 use App\Http\Requests;
 use App\Http\Controllers\Controller;
-use App\SSys\SCompany;
+use App\SSYS\SCompany;
 use Laracasts\Flash\Flash;
 
 class SCompaniesController extends Controller
@@ -27,7 +27,7 @@ class SCompaniesController extends Controller
          $this->iFilter = $request->filter == null ? \Config::get('scsys.FILTER.ACTIVES') : $request->filter;
          $lCompanies = SCompany::Search($request->name, $this->iFilter)->orderBy('name', 'ASC')->paginate(10);
 
-         return view('companies.index')
+         return view('admin.companies.index')
              ->with('companies', $lCompanies)
              ->with('actualUserPermission', NULL)
              ->with('iFilter', $this->iFilter);
@@ -54,7 +54,7 @@ class SCompaniesController extends Controller
     {
       $company = SCompany::find($id);
 
-      return view('companies.edit')->with('company', $company)
+      return view('admin.companies.edit')->with('company', $company)
                                       ->with('iFilter', $this->iFilter);
     }
 
@@ -74,7 +74,7 @@ class SCompaniesController extends Controller
 
       Flash::warning(trans('messages.REG_EDITED'))->important();
 
-      return redirect()->route('companies.index');
+      return redirect()->route('admin.companies.index');
     }
 
 
@@ -90,7 +90,7 @@ class SCompaniesController extends Controller
 
       Flash::success(trans('messages.REG_ACTIVATED'))->important();
 
-      return redirect()->route('companies.index');
+      return redirect()->route('admin.companies.index');
     }
 
     /**
@@ -111,6 +111,6 @@ class SCompaniesController extends Controller
 
       Flash::error(trans('messages.REG_DELETED'))->important();
 
-      return redirect()->route('companies.index');
+      return redirect()->route('admin.companies.index');
     }
 }

@@ -1,4 +1,4 @@
-@extends('front.admin')
+@extends('admin.admin')
 
 @section('title', trans('userinterface.WELCOME_START'))
 

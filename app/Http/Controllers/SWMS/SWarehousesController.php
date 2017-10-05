@@ -12,7 +12,7 @@ use App\SUtils\SMenu;
 use App\SUtils\SValidation;
 use App\SWMS\SWarehouse;
 use App\SWMS\SWhsType;
-use App\SMRP\SBranch;
+use App\SSIIE\SBranch;
 
 class SWarehousesController extends Controller
 {

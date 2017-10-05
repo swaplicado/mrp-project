@@ -5,7 +5,7 @@ use Illuminate\Http\Request;
 use App\Http\Requests;
 use App\Http\Controllers\Controller;
 use App\User;
-use App\SSys\SUserType;
+use App\SSYS\SUserType;
 use Laracasts\Flash\Flash;
 use App\Http\Requests\UserRequest;
 use App\SUtils\SValidation;
@@ -36,7 +36,7 @@ class SUsersController extends Controller
         $this->iFilter = $request->filter == null ? \Config::get('scsys.FILTER.ACTIVES') : $request->filter;
         $users = User::Search($request->name, $this->iFilter)->orderBy('username', 'ASC')->paginate(10);
 
-        return view('users.index')
+        return view('admin.users.index')
             ->with('users', $users)
             ->with('actualUserPermission', $this->oCurrentUserPermission)
             ->with('iFilter', $this->iFilter);
@@ -53,7 +53,7 @@ class SUsersController extends Controller
           {
             $types = SUserType::orderBy('name', 'ASC')->lists('name', 'id_type');
 
-            return view('users.createEdit')->with('types', $types);
+            return view('admin.users.createEdit')->with('types', $types);
           }
           else
           {
@@ -77,7 +77,7 @@ class SUsersController extends Controller
         $user->save();
         Flash::success(trans('messages.REG_CREATED'))->important();
 
-        return redirect()->route('users.index');
+        return redirect()->route('admin.users.index');
     }
 
     /**
@@ -104,7 +104,7 @@ class SUsersController extends Controller
       if (SValidation::canEdit($this->oCurrentUserPermission->privilege_id) || SValidation::canAuthorEdit($this->oCurrentUserPermission->privilege_id, $user->created_by_id))
       {
           $types = SUserType::orderBy('name', 'ASC')->lists('name', 'id_type');
-          return view('users.createEdit')->with('user', $user)
+          return view('admin.users.createEdit')->with('user', $user)
                                           ->with('iFilter', $this->iFilter)
                                           ->with('types', $types);
       }
@@ -129,7 +129,7 @@ class SUsersController extends Controller
         $user->save();
 
         Flash::warning(trans('messages.REG_EDITED'))->important();
-        return redirect()->route('users.index');
+        return redirect()->route('admin.users.index');
     }
 
     /**
@@ -149,7 +149,7 @@ class SUsersController extends Controller
 
       Flash::success(trans('messages.REG_ACTIVATED'))->important();
 
-      return redirect()->route('users.index');
+      return redirect()->route('admin.users.index');
     }
 
     /**
@@ -166,7 +166,7 @@ class SUsersController extends Controller
         $userCopy->id = 0;
         $types = SUserType::orderBy('name', 'ASC')->lists('name', 'id_type');
 
-        return view('users.createEdit')->with('user', $userCopy)
+        return view('admin.users.createEdit')->with('user', $userCopy)
                                       ->with('iFilter', $this->iFilter)
                                       ->with('bIsCopy', true)
                                       ->with('types', $types);
@@ -191,7 +191,7 @@ class SUsersController extends Controller
         #$user->delete();
 
         Flash::error(trans('messages.REG_DELETED'))->important();
-        return redirect()->route('users.index');
+        return redirect()->route('admin.users.index');
       }
       else
       {

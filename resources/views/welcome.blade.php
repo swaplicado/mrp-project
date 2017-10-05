@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 <html lang="es">
-	@include('front.templates.head')
+	@include('templates.head')
 <body>
 	<br />
 	<div class="container">
@@ -15,8 +15,7 @@
 		</div>
 		<div class="panel-body">
 			<section>
-				<h1 style="text-align = center;">MRP</h1>
-				<h1>Manufacturing Resources Planning</h1>
+				<h1 style="text-align = center;">SIIE WEB 1.0</h1>
 
 				<a class="btn btn-primary" href="{{ route('auth.login') }}">Entrar</a>
 			</section>
@@ -35,7 +34,7 @@
 </div>
 
 <footer>
-	@include('front.templates.footer')
+	@include('templates.footer')
 </footer>
 
 </body>

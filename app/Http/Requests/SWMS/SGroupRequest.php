@@ -23,7 +23,7 @@ class SGroupRequest extends Request
     {
         return [
             'name' => 'required',
-            'family_id' => 'required|exists:mrp.wms_item_families,id_family',
+            'family_id' => 'required|exists:siie.wms_item_families,id_family',
         ];
     }
 }

@@ -1,4 +1,4 @@
-<?php namespace App\SSys;
+<?php namespace App\SSYS;
 
 use Illuminate\Database\Eloquent\Model;
 
@@ -17,12 +17,12 @@ class SUserPermission extends Model
 
   public function privilege()
   {
-      return $this->belongsTo('App\SSys\SPrivilege');
+      return $this->belongsTo('App\SSYS\SPrivilege');
   }
 
   public function permission()
   {
-      return $this->belongsTo('App\SSys\SPermission');
+      return $this->belongsTo('App\SSYS\SPermission');
   }
 
   public function scopeSearch($query, $permission_id, $user_id)

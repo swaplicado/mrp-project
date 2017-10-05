@@ -13,7 +13,7 @@ return [
   'UNDEFINED' => '0',
 
   'MODULES'   =>  [
-                  'MRP' => '005',
+                  'SIIE' => '005',
                   'MMS' => '001',
                   'QMS' => '002',
                   'WMS' => '003',
@@ -27,7 +27,7 @@ return [
                   'ASSIGNAMENTS' => '004',
                   'ACCESS' => '005',
                   'COMPANIES' => '006',
-                  'MRP_COMPANIES' => '007',
+                  'SIIE_COMPANIES' => '007',
                   'BRANCHES' => '008',
                   'YEARS' => '009',
                   'MONTHS' => '010',

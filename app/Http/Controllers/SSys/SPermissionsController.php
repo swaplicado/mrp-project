@@ -1,8 +1,8 @@
-<?php namespace App\Http\Controllers\SSys;
+<?php namespace App\Http\Controllers\SSYS;
 
 use Illuminate\Http\Request;
-use App\SSys\SPermission;
-use App\SSys\SPermissionType;
+use App\SSYS\SPermission;
+use App\SSYS\SPermissionType;
 use App\Http\Requests;
 use App\Http\Controllers\Controller;
 use Laracasts\Flash\Flash;
@@ -33,7 +33,7 @@ class SPermissionsController extends Controller
         $this->iFilter = $request->filter == null ? \Config::get('scsys.FILTER.ACTIVES') : $request->filter;
         $permissions = SPermission::Search($request->name, $this->iFilter)->orderBy('name', 'ASC')->paginate(10);
 
-        return view('permissions.index')
+        return view('admin.permissions.index')
                     ->with('permissions', $permissions)
                     ->with('actualUserPermission', $this->oCurrentUserPermission)
                     ->with('iFilter', $this->iFilter);
@@ -50,7 +50,7 @@ class SPermissionsController extends Controller
           {
               $lPermissionTypes = SPermissionType::orderBy('name', 'ASC')->lists('name', 'id_type');
 
-              return view('permissions.createEdit')->with('types', $lPermissionTypes);
+              return view('admin.permissions.createEdit')->with('types', $lPermissionTypes);
           }
           else
           {
@@ -71,7 +71,7 @@ class SPermissionsController extends Controller
 
         Flash::success(trans('messages.REG_CREATED'))->important();
 
-        return redirect()->route('permissions.index');
+        return redirect()->route('admin.permissions.index');
     }
 
     /**
@@ -98,7 +98,7 @@ class SPermissionsController extends Controller
 
         if (SValidation::canEdit($this->oCurrentUserPermission->privilege_id) || SValidation::canAuthorEdit($this->oCurrentUserPermission->privilege_id, $permission->created_by_id))
         {
-          return view('permissions.createEdit')->with('permission', $permission)
+          return view('admin.permissions.createEdit')->with('permission', $permission)
                                                ->with('types', $lPermissionTypes)
                                                 ->with('iFilter', $this->iFilter);
         }
@@ -122,7 +122,7 @@ class SPermissionsController extends Controller
         $permission->save();
 
         Flash::warning(trans('messages.REG_EDITED'))->important();
-        return redirect()->route('permissions.index');
+        return redirect()->route('admin.permissions.index');
     }
 
     public function activate(Request $request, $id)
@@ -135,7 +135,7 @@ class SPermissionsController extends Controller
 
         Flash::success("Se ha activado de forma exitosa!");
 
-        return redirect()->route('permissions.index');
+        return redirect()->route('admin.permissions.index');
     }
 
     /**
@@ -157,7 +157,7 @@ class SPermissionsController extends Controller
           #$permission->delete();
           Flash::error(trans('messages.REG_DELETED'))->important();
 
-          return redirect()->route('permissions.index');
+          return redirect()->route('admin.permissions.index');
         }
         else
         {

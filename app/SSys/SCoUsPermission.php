@@ -1,4 +1,4 @@
-<?php namespace App\SSys;
+<?php namespace App\SSYS;
 
 use Illuminate\Database\Eloquent\Model;
 
@@ -11,12 +11,12 @@ class SCoUsPermission extends Model
 
   public function permission()
   {
-      return $this->belongsTo('App\SSys\SPermission');
+      return $this->belongsTo('App\SSYS\SPermission');
   }
 
   public function company()
   {
-      return $this->belongsTo('App\SSys\SCompany');
+      return $this->belongsTo('App\SSYS\SCompany');
   }
 
   public function user()

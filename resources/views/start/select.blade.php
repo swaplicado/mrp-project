@@ -1,4 +1,4 @@
-@extends('front.mainStart')
+@extends('templates.start.mainStart')
 <br />
 <br />
 @section('title', trans('userinterface.titles.SELECT_COMPANY'))

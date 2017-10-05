@@ -1,7 +1,7 @@
-<?php namespace App\Http\Controllers\SSys;
+<?php namespace App\Http\Controllers\SSYS;
 
 use Illuminate\Http\Request;
-use App\SSys\SPrivilege;
+use App\SSYS\SPrivilege;
 use App\Http\Requests;
 use Laracasts\Flash\Flash;
 use App\Http\Controllers\Controller;
@@ -32,7 +32,7 @@ class SPrivilegesController extends Controller
         $this->iFilter = $request->filter == null ? \Config::get('scsys.FILTER.ACTIVES') : $request->filter;
         $privileges = SPrivilege::Search($request->name, $this->iFilter)->orderBy('name', 'ASC')->paginate(4);
 
-        return view('privileges.index')
+        return view('admin.privileges.index')
                   ->with('privileges', $privileges)
                   ->with('actualUserPermission', $this->oCurrentUserPermission)
                   ->with('iFilter', $this->iFilter);
@@ -47,7 +47,7 @@ class SPrivilegesController extends Controller
     {
       if (SValidation::canCreate($this->oCurrentUserPermission->privilege_id))
         {
-          return view('privileges.createEdit');
+          return view('admin.privileges.createEdit');
         }
         else
         {
@@ -68,7 +68,7 @@ class SPrivilegesController extends Controller
 
         Flash::success(trans('messages.REG_CREATED'))->important();
 
-        return redirect()->route('privileges.index');
+        return redirect()->route('admin.privileges.index');
     }
 
     /**
@@ -94,7 +94,7 @@ class SPrivilegesController extends Controller
 
         if (SValidation::canEdit($this->oCurrentUserPermission->privilege_id) || SValidation::canAuthorEdit($this->oCurrentUserPermission->privilege_id, $privilege->created_by))
         {
-          return view('privileges.createEdit')
+          return view('admin.privileges.createEdit')
                                               ->with('privilege', $privilege)
                                               ->with('iFilter', $this->iFilter);
         }
@@ -118,7 +118,7 @@ class SPrivilegesController extends Controller
         $privilege->save();
 
         Flash::warning(trans('messages.REG_EDITED'))->important();
-        return redirect()->route('privileges.index');
+        return redirect()->route('admin.privileges.index');
     }
 
     public function activate(Request $request, $id)
@@ -132,7 +132,7 @@ class SPrivilegesController extends Controller
 
       Flash::success(trans('messages.REG_ACTIVATED'))->important();
 
-      return redirect()->route('privileges.index');
+      return redirect()->route('admin.privileges.index');
     }
 
     /**
@@ -154,7 +154,7 @@ class SPrivilegesController extends Controller
         #$privilege->delete();
         Flash::error(trans('messages.REG_DELETED'))->important();
 
-        return redirect()->route('privileges.index');
+        return redirect()->route('admin.privileges.index');
       }
       else
       {

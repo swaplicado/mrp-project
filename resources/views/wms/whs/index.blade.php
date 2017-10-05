@@ -1,7 +1,7 @@
-@extends('front.mainListado')
+@extends('templates.list.mainlist')
 
 @section('menu')
-	@include('front.templates.menumodules')
+	@include('templates.menu.menumodules')
 @endsection
 
 @section('title', trans('userinterface.titles.LIST_WAREHOUSES'))
@@ -9,7 +9,7 @@
 @section('content')
 	<?php $sRoute="wms.whs"?>
 	@section('create')
-		@include('front.templates.create')
+		@include('templates.form.create')
 	@endsection
 	<table data-toggle="table" class="table table-condensed">
 		<thead>
@@ -39,7 +39,7 @@
 								$oRegistry = $whs;
 								$iRegistryId = $whs->id_whs;
 						?>
-						@include('front.listed.options')
+						@include('templates.list.options')
 					</td>
 				</tr>
 			@endforeach

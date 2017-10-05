@@ -3,9 +3,9 @@
 use Illuminate\Http\Request;
 
 use App\Http\Requests;
-use App\SSys\SUserPermission;
-use App\SSys\SUserCompany;
-use App\SSys\SCompany;
+use App\SSYS\SUserPermission;
+use App\SSYS\SUserCompany;
+use App\SSYS\SCompany;
 
 class SUtil {
 
@@ -20,11 +20,11 @@ class SUtil {
    *
    * @param  int  $identifier
    * @param  int  $id_user
-   * @return App\SSys\UserPermission
+   * @return App\SSYS\UserPermission
    */
   public static function getTheUserPermission($id_user, $identifier)
   {
-      \Config::set('database.connections.mrp.database', session()->has('company') ? session('company')->database_name : "");
+      \Config::set('database.connections.siie.database', session()->has('company') ? session('company')->database_name : "");
       
       if (\Auth::check() && \Auth::user()->user_type_id == \Config::get('scsys.TP_USER.ADMIN'))
       {
@@ -47,7 +47,7 @@ class SUtil {
    * Return a list of UserCompany objects corresponding to the user.
    *
    * @param  int  $iUserId
-   * @return list of App\SSys\UserCompany
+   * @return list of App\SSYS\UserCompany
    */
   public static function getUserCompany($oUser)
   {
@@ -86,7 +86,7 @@ class SUtil {
    * @param  int  $sUser
    * @param  int  $sPassword
    *
-   * @return list of App\SSys\UserCompany
+   * @return list of App\SSYS\UserCompany
    */
   public static function reconnectDataBase($sConnectionName, $bDefault, $sHost, $sDataBase, $sUser, $sPassword)
   {

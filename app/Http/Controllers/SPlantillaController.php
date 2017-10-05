@@ -14,7 +14,7 @@ class SPlantillaController extends Controller
      */
     public function index()
     {
-        return view('front.admin');
+        return view('admin.admin');
     }
     public function captura()
     {
@@ -22,7 +22,7 @@ class SPlantillaController extends Controller
     }
     public function listado()
     {
-        return view('front.mainListado');
+        return view('templates.list.mainlist');
     }
     public function footer()
     {

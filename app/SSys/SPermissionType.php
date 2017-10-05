@@ -1,4 +1,4 @@
-<?php namespace App\SSys;
+<?php namespace App\SSYS;
 
 use Illuminate\Database\Eloquent\Model;
 
@@ -11,7 +11,7 @@ class SPermissionType extends Model {
 
     public function permissions()
     {
-      return $this->hasMany('App\SMRP\SPermission');
+      return $this->hasMany('App\SSIIE\SPermission');
     }
 
     public function scopeSearch($query, $name, $iFilter)

@@ -4,8 +4,8 @@
 
 	return [
 
-		'SYS' => 'MRP',
-		'SYSTEM' => 'Manufacturing Resources Planning',
+		'SYS' => 'SIIE',
+		'SYSTEM' => 'SIIE WEB 1.0',
 		'WELCOME_START' => 'Bienvenido, ingrese datos',
 		'HOME' => 'Inicio',
 		'HELP' => 'Ayuda',
